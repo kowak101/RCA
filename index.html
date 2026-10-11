@@ -159,6 +159,27 @@ a{color:var(--blue-500)}
   letter-spacing:.14em;color:#61758c;text-transform:uppercase;display:flex;justify-content:space-between;gap:6px}
 .dot-ok{color:#4ade80}
 
+/* --- zwinięte menu boczne: zostaje pasek ikon --- */
+body.side-collapsed #sidebar{width:54px;flex:0 0 54px;overflow:hidden}
+body.side-collapsed #main{margin-left:54px}
+body.side-collapsed .step-dock{left:54px}
+body.side-collapsed .brand-name,
+body.side-collapsed .brand-sub,
+body.side-collapsed .nav-label,
+body.side-collapsed .nav-item span:not(.nav-num):not(.nav-ico):not(.nav-badge),
+body.side-collapsed .side-case,
+body.side-collapsed .side-user .su-txt,
+body.side-collapsed .side-user .su-out,
+body.side-collapsed .side-viewas,
+body.side-collapsed .side-profile,
+body.side-collapsed .case-zone .cz-head,
+body.side-collapsed .side-foot span:last-child{display:none}
+body.side-collapsed .nav-item{justify-content:center;padding:9px 0}
+body.side-collapsed .brand{padding:14px 0;text-align:center}
+body.side-collapsed .brand-mark{justify-content:center}
+body.side-collapsed .side-user{justify-content:center;padding:8px 0}
+body.side-collapsed [data-action="side-toggle"]{transform:rotate(180deg)}
+
 /* ---------- TOPBAR ---------- */
 #topbar{
   position:sticky;top:0;z-index:30;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);
@@ -1151,6 +1172,15 @@ table.risk5 td.cur{outline:3px solid #141414;outline-offset:-3px}
   color:var(--stone-500);padding-top:2px}
 
 /* --- zamknięty raport: wszystko widoczne, nic do zmiany --- */
+body.case-locked #view [data-bind="event.approver_id"],
+body.case-locked #view [data-bind="event.approver_comment"],
+body.case-locked #view [data-bind="event.dissenting_opinion"]{
+  background:#fff!important;color:var(--txt)!important;border-style:solid!important;pointer-events:auto!important;
+  cursor:text!important;border-color:var(--amber-500)!important}
+body.case-final #view [data-bind="event.approver_id"],
+body.case-final #view [data-bind="event.approver_comment"],
+body.case-final #view [data-bind="event.dissenting_opinion"]{
+  background:var(--stone-100)!important;pointer-events:none!important;border-style:dashed!important}
 body.case-locked #view input:not([type="button"]),
 body.case-locked #view textarea,
 body.case-locked #view select{
@@ -1163,6 +1193,20 @@ body.case-locked #view .tn-tools{opacity:.35;pointer-events:none}
 .tbl tr.row-void{opacity:.55}
 .tbl tr.row-void td{text-decoration:line-through;text-decoration-color:var(--stone-400)}
 .tbl tr.row-void td:first-child{text-decoration:none}
+
+/* --- tło bloczka według statusu ustalenia ---
+   Warstwa daje kolor pasa, status — tło: od razu widać, co jest jeszcze
+   hipotezą, co sprawdzane, a co potwierdzone.                              */
+.wnode.st-HIPOTEZA,.tnode.st-HIPOTEZA{background:#fbfbfc;border-style:dashed}
+.wnode.st-W_WERYFIKACJI,.tnode.st-W_WERYFIKACJI{background:#fffaf0}
+.wnode.st-POTWIERDZONA,.tnode.st-POTWIERDZONA{background:#f5fbf7}
+.wnode.st-ODRZUCONA,.tnode.st-ODRZUCONA{background:#fdf5f5;opacity:.72}
+.wnode.st-ODRZUCONA .tn-edit,.tnode.st-ODRZUCONA .tn-edit{text-decoration:line-through}
+.wnode.st-DO_CAPA,.tnode.st-DO_CAPA{background:#faf7fd}
+.why-item.st-HIPOTEZA .why-card{background:#fbfbfc}
+.why-item.st-W_WERYFIKACJI .why-card{background:#fffaf0}
+.why-item.st-POTWIERDZONA .why-card{background:#f8fdfa}
+.why-item.st-ODRZUCONA .why-card{background:#fdf5f5;opacity:.75}
 
 /* --- obiekt wpinany przy przyczynie --- */
 .cause-obj{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:9px;padding:7px 10px;
@@ -1586,6 +1630,21 @@ body.ui-mobile .mcase-row .r-inst{font-size:11.5px;color:var(--navy-700);margin-
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 body.ui-mobile .mcase-row .r-desc{font-size:12px;color:var(--txt-dim);line-height:1.4;margin-top:4px;
   display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+body.ui-mobile .card-head h3{font-size:14px}
+body.ui-mobile .card-head .sub{font-size:11px;line-height:1.35}
+body.ui-mobile .card-body{padding:12px}
+body.ui-mobile .card-body.tight{padding:10px}
+body.ui-mobile .mcause{padding:11px;margin-bottom:10px;border-radius:2px}
+body.ui-mobile .mcause .mc-head{margin-bottom:8px;gap:8px}
+body.ui-mobile .mcause .mc-no{width:24px;height:24px;flex:0 0 24px;font-size:12px}
+body.ui-mobile .mcause .mc-state{font-size:11.5px;font-weight:700}
+body.ui-mobile .mcause textarea{font-size:15px;line-height:1.45;padding:10px}
+body.ui-mobile .mcause .mc-seg{margin-top:9px}
+body.ui-mobile .mcause .mc-seg button{font-size:11.5px;padding:7px 4px}
+body.ui-mobile .mcause .mc-act{margin-top:9px;gap:7px}
+body.ui-mobile .mwhy-ev{margin-top:9px;gap:7px}
+body.ui-mobile .mwhy-ev img{width:62px;height:62px;border-radius:2px}
+body.ui-mobile .tag{font-size:10.5px}
 body.ui-mobile .mwhy{background:#fff;border:1px solid var(--line);border-left:3px solid var(--stone-300);margin-bottom:10px}
 body.ui-mobile .mwhy.root{border-left-color:var(--green-500);box-shadow:0 0 0 1px var(--green-500) inset}
 body.ui-mobile .mwhy.effect{border-left-color:var(--navy-700)}
@@ -1699,6 +1758,7 @@ body.ui-mobile .mcause .mc-act .btn{flex:1 1 auto}
   <div id="main">
     <header id="topbar">
       <button class="icon-btn neutral" id="menuBtn" title="Menu">☰</button>
+      <button class="icon-btn neutral" data-action="side-toggle" title="Zwiń albo rozwiń menu boczne">⇤</button>
       <div class="crumb" id="crumb"></div>
       <div class="topbar-right">
         <span id="uiHost"></span>
@@ -1755,11 +1815,27 @@ body.ui-mobile .mcause .mc-act .btn{flex:1 1 auto}
       aktywne wartości pochodzą z bazy lokalnej (S.db.dicts).
    ===================================================================== */
 
-const APP_VERSION = "2.3.4";
+const APP_VERSION = "2.4.2";
 const DB_VERSION = 8;
 
 /* dziennik zmian wydań — widoczny w zakładce Dane */
 const CHANGELOG = [
+  { ver:"2.4.2", date:"2026-10-11", items:[
+    "Wersja terenowa: zakładka „Przyczyny” nazywa się „Analiza RCA” — tak samo jak moduł w wersji biurowej.",
+    "Do skutku zdarzenia można w telefonie dopiąć zdjęcia i pliki, tak jak do przyczyny.",
+    "Czytelniejszy układ kart w telefonie: większa czcionka pól, więcej odstępu, wyraźniejsze stany przyczyn.",
+    "Menu boczne w wersji biurowej da się zwinąć do paska ikon — stan jest zapamiętywany.",
+    "Gotowy pakiet do postawienia na serwerze: katalog serwer/ z plikiem index.html, .htaccess i instrukcją."
+  ]},
+  { ver:"2.4.1", date:"2026-10-11", items:[
+    "Pełne tłumaczenie interfejsu: audyt wszystkich widoków, zakładek konfiguratora i okien modalnych — zero polskich napisów w trybie angielskim poza treścią spraw, która jest danymi użytkownika.",
+    "Silnik tłumaczeń: wzorzec bez dopasowania przepuszcza tekst dalej, segmenty składane przechodzą przez wzorce, a podpowiedzi i tytuły są tłumaczone tak samo jak etykiety — koniec zlepków typu „No startu na żądanie”.",
+    "Sześć branż wiodących, status „Zalecenia — realizacja” scalony z „Zatwierdzony”, mniej kodów FC wymagających HFACS.",
+    "Zatwierdzanie: treść raportu zamknięta, ale zatwierdzający wpisuje uwagę i podpis; poprawka treści wymaga tylko cofnięcia statusu, nie aneksu.",
+    "Tabela krzyżowa przyczyn reaguje na zmianę wymiarów i miary, mapa ciepła ma ustawienia etykiet, podpis do 60 znaków.",
+    "Tło bloczków zależne od statusu ustalenia; ekran nie skacze przy pisaniu w bloczku.",
+    "Utrata produkcji w tonach wycofana z pól, raportów i analityki."
+  ]},
   { ver:"2.3.4", date:"2026-10-11", items:[
     "Etykiety wykresów do ustawienia ręcznie: przesunięcie w poziomie i w pionie oraz zapas miejsca na długie podpisy — suwaki w kreatorze z podglądem na żywo.",
     "Branża wiodąca wymagana na przyczynie źródłowej — wskazuje służbę odpowiedzialną za usunięcie przyczyny.",
@@ -1930,11 +2006,12 @@ const MAIN_STATUS = {
   POWOLANIE:              { code:"POWOLANIE",              name:"Powołano",              order:1, tone:"blue",   desc:"Rozpoczęcie sprawy RCA i przygotowanie do pracy zespołu." },
   PRACA_ZESPOLU:          { code:"PRACA_ZESPOLU",          name:"W trakcie prac",          order:2, tone:"amber",  desc:"Główna faza pracy analitycznej zespołu RCA." },
   ZATWIERDZANIE:          { code:"ZATWIERDZANIE",          name:"W zatwierdzaniu",          order:3, tone:"violet", desc:"Raport RCA przekazany do akceptacji." },
-  ZATWIERDZONY:           { code:"ZATWIERDZONY",           name:"Zatwierdzony",           order:4, tone:"green",  desc:"Raport RCA zaakceptowany, zalecenia przechodzą do realizacji." },
-  ZALECENIA_REALIZACJA:   { code:"ZALECENIA_REALIZACJA",   name:"Zalecenia — realizacja", order:5, tone:"amber",  desc:"Trwa wykonanie zaleceń RCA / CAPA." },
-  ZALECENIA_ZREALIZOWANO: { code:"ZALECENIA_ZREALIZOWANO", name:"Zalecenia — zrealizowano",order:6, tone:"green",  desc:"Wszystkie wymagane zalecenia zakończone." }
+  ZATWIERDZONY:           { code:"ZATWIERDZONY",           name:"Zatwierdzony",           order:4, tone:"green",  desc:"Raport zaakceptowany; trwa realizacja zaleceń przez wskazanych właścicieli." },
+  /* Zatwierdzenie raportu jest równoznaczne ze startem realizacji zaleceń —
+     osobny status nic nie wnosił, a wymuszał dodatkowe kliknięcie.          */
+  ZALECENIA_ZREALIZOWANO: { code:"ZALECENIA_ZREALIZOWANO", name:"Zalecenia — zrealizowano",order:5, tone:"green",  desc:"Wszystkie wymagane zalecenia zakończone." }
 };
-const STATUS_FLOW = ["POWOLANIE","PRACA_ZESPOLU","ZATWIERDZANIE","ZATWIERDZONY","ZALECENIA_REALIZACJA","ZALECENIA_ZREALIZOWANO"];
+const STATUS_FLOW = ["POWOLANIE","PRACA_ZESPOLU","ZATWIERDZANIE","ZATWIERDZONY","ZALECENIA_ZREALIZOWANO"];
 
 /* --- poziomy struktury organizacyjnej (Firma → Zakład → Blok → Instalacja) --- */
 const DEF_ORG_LEVELS = [
@@ -2064,8 +2141,10 @@ const DEF_FC = [
   { he:"opt", code:"FC-DES-1.1", name:"Projektowe — Nieodpowiednia wydajność",       desc:"Urządzenie niedowymiarowane lub przewymiarowane." },
   { he:"opt", code:"FC-DES-1.2", name:"Projektowe — Nieodpowiedni materiał",         desc:"Błędny dobór metalurgii lub uszczelnień do mediów." },
   { he:"opt", code:"FC-FAB-2.0", name:"Wytwórcze / montażowe — Ogólne",              desc:"Wady materiałowe lub montażowe dostawcy." },
-  { he:"req", code:"FC-FAB-2.1", name:"Wytwórcze — Błąd wytwarzania",                desc:"Wady odlewnicze, spawalnicze u producenta." },
-  { he:"req", code:"FC-FAB-2.2", name:"Wytwórcze — Błąd pierwotnego montażu",        desc:"Błędne posadowienie, wyosiowanie podczas budowy." },
+  /* Błąd wytwórcy i ekipy montażowej zdarza się poza naszą organizacją —
+     HFACS opisuje czynniki ludzkie w zakładzie, więc tu jest opcjonalny.    */
+  { he:"opt", code:"FC-FAB-2.1", name:"Wytwórcze — Błąd wytwarzania",                desc:"Wady odlewnicze, spawalnicze u producenta." },
+  { he:"opt", code:"FC-FAB-2.2", name:"Wytwórcze — Błąd pierwotnego montażu",        desc:"Błędne posadowienie, wyosiowanie podczas budowy." },
   /* proc:true — kod opisuje zachowanie pracującej instalacji, więc należy
      doprecyzować, jakie odchylenie procesowe (PD) przy nim wystąpiło.        */
   { he:"opt", proc:true, code:"FC-OPM-3.0", name:"Eksploatacyjne / utrzymaniowe — Ogólne",      desc:"Czynniki związane z codziennym użytkowaniem maszyn." },
@@ -2073,7 +2152,7 @@ const DEF_FC = [
   { he:"req", proc:true, code:"FC-OPM-3.2", name:"Eksploatacyjne — Błąd operacyjny",            desc:"Pomyłka obsługi, złe przełączenie armatury." },
   { he:"req", code:"FC-OPM-3.3", name:"Eksploatacyjne — Błąd utrzymaniowy",          desc:"Złe smarowanie, niewłaściwy moment dokręcania śrub." },
   { he:"no", code:"FC-OPM-3.4", name:"Eksploatacyjne — Normalne zużycie",           desc:"Naturalne wytarcie, zmęczenie materiału po resursie." },
-  { he:"req", code:"FC-MGT-4.0", name:"Zarządcze / proceduralne — Ogólne",           desc:"Uchybienia w standardach, planowaniu i szkoleniach." },
+  { he:"opt", code:"FC-MGT-4.0", name:"Zarządcze / proceduralne — Ogólne",           desc:"Uchybienia w standardach, planowaniu i szkoleniach." },
   { he:"req", code:"FC-MGT-4.1", name:"Zarządcze — Błąd dokumentacji / procedur",    desc:"Przestarzałe instrukcje operacyjne, brak checklisty." },
   { he:"req", code:"FC-MGT-4.2", name:"Zarządcze — Błąd zarządczy / organizacyjny",  desc:"Błędny podział odpowiedzialności, brak zasobów." },
   { he:"no", code:"FC-MIS-5.0", name:"Różne — Ogólne",                              desc:"Kombinacje lub inne niesklasyfikowane przyczyny." },
@@ -2114,15 +2193,15 @@ const DEF_PDEV = [
 ];
 
 /* --- 8.4 Branże / Discipline --- */
+/* Sześć branż — tyle, ile służb realnie odpowiada za usunięcie przyczyny.
+   Dawne kody PRC, HSE i OPR przechodzą na „Produkcja" (migracja w p19_boot). */
 const DEF_DISCIPLINE = [
-  { code:"MSE", name:"MSE — Mechanika statyczna",    desc:"Rurociągi, zbiorniki, aparaty, wymienniki ciepła." },
-  { code:"MRE", name:"MRE — Maszyny wirujące",       desc:"Pompy, sprężarki, turbiny, wentylatory." },
-  { code:"AUT", name:"AUT — Automatyka / AKPiA",     desc:"Czujniki, zawory regulacyjne, sterowniki DCS/PLC." },
-  { code:"PRC", name:"PRC — Proces / Technologia",   desc:"Parametry fizykochemiczne, destylacja, reakcja." },
-  { code:"ELE", name:"ELE — Elektryka",              desc:"Silniki, transformatory, rozdzielnice SN/NN." },
-  { code:"CIV", name:"CIV — Budownictwo",            desc:"Fundamenty, estakady rurociągów, hale." },
-  { code:"HSE", name:"HSE — BHP / Bezpieczeństwo",   desc:"Środki ochrony, bariery ESD, detekcja gazów." },
-  { code:"OPR", name:"OPR — Operacje / Produkcja",   desc:"Obsługa operatorska, procedury rozruchowe." }
+  { code:"MSE", name:"Mechanika statyczna", desc:"Rurociągi, zbiorniki, aparaty, wymienniki ciepła." },
+  { code:"MRE", name:"Maszyny wirujące",    desc:"Pompy, sprężarki, turbiny, wentylatory, mieszadła." },
+  { code:"ELE", name:"Elektryka",           desc:"Silniki, transformatory, rozdzielnice, zasilanie." },
+  { code:"AUT", name:"Automatyka",          desc:"Przetworniki, zawory regulacyjne, DCS, PLC, systemy bezpieczeństwa." },
+  { code:"PRO", name:"Produkcja",           desc:"Prowadzenie procesu, obsługa operatorska, procedury ruchowe." },
+  { code:"CIV", name:"Budownictwo",         desc:"Fundamenty, estakady, konstrukcje wsporcze, obiekty." }
 ];
 
 /* --- 21.3 Obszary (słownik zapasowy, gdy brak struktury organizacyjnej) --- */
@@ -2864,7 +2943,7 @@ const DEF_EQUIP_CLASS = [
     modes:["ELP","STD","PLU","PDE","SER","OTH","UNK"],
     mechs:["FM-2.2","FM-2.5","FM-2.6","FM-1.1","FM-1.4","FM-5.2","FM-6.4"] },
 
-  { code:"FH", name:"Piece i kotły", disc:"PRC",
+  { code:"FH", name:"Piece i kotły", disc:"PRO",
     types:["piec rurowy","kocioł odzysknicowy","kocioł parowy","reformer"],
     modes:["OHE","ELP","STD","PLU","LOO","UST","PDE","SER","OTH","UNK"],
     mechs:["FM-2.2","FM-2.5","FM-2.6","FM-2.7","FM-3.1","FM-5.1","FM-5.2","FM-6.1","FM-6.4"] },
@@ -2895,7 +2974,7 @@ const DEF_EQUIP_CLASS = [
     modes:["FTF","ERO","UST","AIR","SER","OTH","UNK"],
     mechs:["FM-3.0","FM-3.1","FM-3.2","FM-3.3","FM-3.5","FM-3.6","FM-4.3","FM-4.4","FM-6.4"] },
 
-  { code:"SF", name:"Systemy bezpieczeństwa (ESD, F&G, ppoż.)", disc:"HSE",
+  { code:"SF", name:"Systemy bezpieczeństwa (ESD, F&G, ppoż.)", disc:"AUT",
     types:["system ESD","detekcja gazów","detekcja pożaru","tryskacze / zraszacze","system pianowy"],
     modes:["FTF","UST","AIR","ERO","SER","OTH","UNK"],
     mechs:["FM-3.2","FM-3.3","FM-3.6","FM-4.3","FM-5.2","FM-1.6","FM-6.4"] },
@@ -2917,7 +2996,7 @@ const DEF_EQUIP_CLASS = [
     mechs:["FM-4.2","FM-4.3","FM-4.4","FM-2.4","FM-2.7","FM-6.4"] },
 
   /* --- obiekty nietechniczne i wyjątki --- */
-  { code:"PR", name:"Węzeł technologiczny (bez uszkodzenia obiektu)", disc:"PRC",
+  { code:"PR", name:"Węzeł technologiczny (bez uszkodzenia obiektu)", disc:"PRO",
     types:["instalacja","węzeł procesowy","układ regulacji","media pomocnicze"],
     modes:["PDE","HIO","LOO","UST","PLU","SER","OTH","UNK"],
     mechs:["FM-5.2","FM-5.3","FM-6.0","FM-6.1","FM-6.2","FM-6.4"] },
@@ -6449,14 +6528,12 @@ function canTransition(eventId, nextStatus){
     if (!ev.summary_root) blockers.push("Uzupełnij podsumowanie przyczyny źródłowej w raporcie.");
   }
 
+  /* Zatwierdzenie raportu uruchamia realizację, więc zalecenia muszą mieć
+     już właściciela i termin — inaczej nie ma komu i kiedy ich wykonać.     */
   if (nextStatus === "ZATWIERDZONY"){
     if (!ev.approver_id) blockers.push("Wskaż osobę zatwierdzającą raport RCA.");
-    if (!recsOf(eventId).length) blockers.push("Lista zaleceń musi zostać zatwierdzona — brak zaleceń.");
-  }
-
-  if (nextStatus === "ZALECENIA_REALIZACJA"){
     const recs = recsOf(eventId);
-    if (!recs.length) blockers.push("Brak zaleceń do realizacji.");
+    if (!recs.length) blockers.push("Lista zaleceń musi zostać zatwierdzona — brak zaleceń.");
     recs.forEach(function(r){
       if (!r.owner_id) blockers.push("Zalecenie „" + truncate(r.description,40) + "” nie ma realizatora.");
       if (!r.due_date) blockers.push("Zalecenie „" + truncate(r.description,40) + "” nie ma terminu.");
@@ -6493,8 +6570,7 @@ function doTransition(eventId, nextStatus, payload){
   if (nextStatus === "ZATWIERDZONY"){
     ev.approved_date = nowIso();
     if (payload && payload.approver_comment) ev.approver_comment = payload.approver_comment;
-  }
-  if (nextStatus === "ZALECENIA_REALIZACJA"){
+    /* zatwierdzenie = start realizacji: zalecenia wchodzą w bieg terminów */
     recsOf(eventId).forEach(function(r){
       if (r.recommendation_status === "NOWE" || r.recommendation_status === "PRZYPISANE")
         r.recommendation_status = "W_REALIZACJI";
@@ -6504,6 +6580,9 @@ function doTransition(eventId, nextStatus, payload){
     (payload && payload.approver_comment) ? payload.approver_comment : "", "STATUS_CHANGE");
   persist(true);
   toast("Status zmieniony na: " + statusName(nextStatus), "ok");
+  /* Po zmianie statusu aplikacja przygotowuje powiadomienia: do zatwierdzającego
+     (z odnośnikiem do raportu) albo do zespołu i właścicieli zaleceń.        */
+  if (typeof statusNotifyModal === "function") statusNotifyModal(eventId, nextStatus);
   render();
   return true;
 }
@@ -7092,7 +7171,6 @@ const CHART_METRICS = [
   { id:"lossH",     group:"Zdarzenia",  label:"Utrata dostępności",       of:"event", unit:"h",  dec:1, val:function(e){ return (Number(e.shutdown_hours)||0); } },
   { id:"stopH",     group:"Zdarzenia",  label:"Czas zatrzymania",         of:"event", unit:"h",  dec:1, val:function(e){ return Number(e.shutdown_hours)||0; } },
   { id:"derateH",   group:"Zdarzenia",  label:"Czas ograniczenia",        of:"event", unit:"h",  dec:1, val:function(e){ return Number(e.derate_hours)||0; } },
-  { id:"prodLoss",  group:"Zdarzenia",  label:"Utrata produkcji",         of:"event", unit:"t",       val:function(e){ return Number(e.production_loss)||0; } },
   { id:"pum",       group:"Finanse",    label:"PUM — utrata marży",       of:"event", unit:"mln PLN", dec:2, val:function(e){ return Number(e.pum_value)||0; } },
   { id:"damage",    group:"Finanse",    label:"Koszt uszkodzeń",          of:"event", unit:"PLN",     val:function(e){ return Number(e.asset_damage_cost)||0; } },
   { id:"avgClose",  group:"Czasy",      label:"Śr. czas zamknięcia RCA",  of:"event", unit:"dni", avg:true,
@@ -7588,7 +7666,9 @@ function svgPie(d, W, H){
 }
 
 function svgHeat(d, W, H){
-  const padL = Math.min(150, Math.max(84, W * 0.24)), padT = 68, padR = 10, padB = 16;
+  /* nagłówki kolumn bywają długie — margines i obrót ustawia autor wykresu */
+  const padL = Math.min(320, Math.max(84, W * 0.24 + labelPad(d.spec))),
+        padT = 68 + labelPad(d.spec), padR = 10, padB = 16;
   const cols = d.labels.length, rows = d.series.length;
   if (!rows) return '<text x="' + (W/2) + '" y="' + (H/2) + '" text-anchor="middle" font-size="12" fill="#9e9e9e">Wybierz wymiar krzyżowy</text>';
   const cw = (W - padL - padR) / cols, ch = Math.min(34, (H - padT - padB) / rows);
@@ -7598,12 +7678,17 @@ function svgHeat(d, W, H){
   let g = "";
   d.labels.forEach(function(lb, i){
     const x = padL + cw * i + cw / 2;
-    g += '<text x="' + x.toFixed(1) + '" y="' + (padT - 8) + '" text-anchor="end" font-size="9" fill="#6b6b6b" ' +
-      'transform="rotate(-38 ' + x.toFixed(1) + ' ' + (padT - 8) + ')">' + svgEsc(wrapLabel(lb, 13)) + '</text>';
+    const hx = x + labelDX(d.spec), hy = padT - 8 + labelDY(d.spec);
+    const hrot = (d.spec && d.spec.labelRot) ? labelRot(d.spec, cols) : -38;
+    g += '<text x="' + hx.toFixed(1) + '" y="' + hy.toFixed(1) + '" text-anchor="end" font-size="' +
+      labelSize(d.spec) + '" fill="#6b6b6b" ' +
+      (hrot ? 'transform="rotate(' + hrot + ' ' + hx.toFixed(1) + ' ' + hy.toFixed(1) + ')"' : "") + '>' +
+      svgEsc(wrapLabel(lb, labelWrapLen(d.spec, 13))) + '</text>';
   });
   d.series.forEach(function(se, r){
     const y = padT + ch * r;
-    g += '<text x="' + (padL - 7) + '" y="' + (y + ch/2 + 3.5).toFixed(1) + '" text-anchor="end" font-size="9.5" fill="#232323">' + svgEsc(wrapLabel(se.label, 20)) + '</text>';
+    g += '<text x="' + (padL - 7) + '" y="' + (y + ch/2 + 3.5).toFixed(1) + '" text-anchor="end" font-size="' +
+      (labelSize(d.spec) + 0.5) + '" fill="#232323">' + svgEsc(wrapLabel(se.label, labelWrapLen(d.spec, 20))) + '</text>';
     se.values.forEach(function(v, i){
       const t = v / max;
       const fill = v === 0 ? "#f5f5f5" : "rgba(227,0,11," + (0.10 + t * 0.85).toFixed(2) + ")";
@@ -9018,7 +9103,6 @@ function registrationCard(ev){
         { type:"number", step:"0.1", min:0, bind:"event.startup_delay_hours:number",
           disabled: ev.operational_phase_code !== "STB",
           hint: ev.operational_phase_code === "STB" ? "faza: postój / stand-by" : "dostępne tylko przy fazie „Postój / stand-by”" }) +
-      fieldText("Nieplanowana utrata produkcji [t]","production_loss", ev.production_loss, { type:"number", step:"0.5", min:0, bind:"event.production_loss:number" }) +
       fieldText("PUM — potencjalna utrata marży [mln PLN]","pum_value", ev.pum_value, { type:"number", step:"0.01", min:0, bind:"event.pum_value:number",
         disabled: ev.pum_auto !== false,
         hint: instPum ? ("stawka: " + num(instPum.pum_7d,2) + " / " + num(instPum.pum_gt7d,2) + " mln PLN/d") : "brak stawki PUM dla instalacji" }) +
@@ -9771,7 +9855,6 @@ function viewM2(){
         { type:"number", step:"0.1", min:0, bind:"event.startup_delay_hours:number",
           disabled: ev.operational_phase_code !== "STB",
           hint: ev.operational_phase_code === "STB" ? "faza: postój / stand-by" : "dostępne tylko przy fazie „Postój / stand-by”" }) +
-      fieldText("Nieplanowana utrata produkcji [t]","production_loss", ev.production_loss, { ui:"m2.prodloss", type:"number", step:"0.5", min:0, bind:"event.production_loss:number" }) +
       fieldText("PUM — potencjalna utrata marży [mln PLN]","pum_value", ev.pum_value, { ui:"m2.pum", type:"number", step:"0.01", min:0, bind:"event.pum_value:number",
         disabled: ev.pum_auto !== false,
         hint: instPum ? ("stawka instalacji: " + num(instPum.pum_7d,2) + " / " + num(instPum.pum_gt7d,2) + " mln PLN/d") : "brak stawki PUM dla instalacji" }) +
@@ -10648,6 +10731,7 @@ function render5Why(ev){
     const nRc = allRc.filter(function(r){ return r.why_id === w.why_id; }).length;
     h += (i ? '<div class="why-arrow">→</div>' : "") +
       '<div class="wnode n-' + esc(w.node_type || "CAUSE") + (w.cause_layer ? " lay-" + esc(w.cause_layer) : "") +
+        (w.node_status ? " st-" + esc(w.node_status) : "") +
         (w.is_root_cause_candidate ? " root" : "") + '" id="whyflow-' + attr(w.why_id) + '">' +
         /* kolor pasa bierze się z warstwy przyczyny, nie z rodzaju bloczka —
            skutek ma własny, grafitowy, żeby nie mylił się z przyczyną bezpośrednią */
@@ -10682,7 +10766,8 @@ function render5Why(ev){
     const hasCodes = !!(w.fc_code || w.he_code || w.pd_code);
 
     h += '<div class="why-item n-' + esc(w.node_type || "CAUSE") + (w.is_root_cause_candidate ? " root" : "") +
-      (w.cause_layer ? " lay-" + esc(w.cause_layer) : "") + '" id="why-' + attr(w.why_id) + '">' +
+      (w.cause_layer ? " lay-" + esc(w.cause_layer) : "") + (w.node_status ? " st-" + esc(w.node_status) : "") +
+      '" id="why-' + attr(w.why_id) + '">' +
       '<div class="why-dot">' + w.level_no + '</div>' +
       '<div class="why-card">' +
 
@@ -10893,7 +10978,8 @@ function nodeCardHtml(n, pos, nEv, nTk, nRc, overdue){
   if (n.he_code) codes += '<span class="c-he" title="' + attr(dictName(HE,n.he_code)) + '">' + esc(n.he_code) + '</span>';
   if (n.pd_code) codes += '<span class="c-pd" title="' + attr(dictName(PDEV,n.pd_code)) + '">' + esc(n.pd_code) + '</span>';
 
-  return '<div class="tnode n-' + esc(n.node_type) + layCls + (S.selectedNodeId === n.node_id ? " sel" : "") + '" ' +
+  return '<div class="tnode n-' + esc(n.node_type) + layCls + (n.node_status ? " st-" + esc(n.node_status) : "") +
+    (S.selectedNodeId === n.node_id ? " sel" : "") + '" ' +
     'style="left:' + pos.x + 'px;top:' + pos.y + 'px" data-action="node-select" data-id="' + attr(n.node_id) + '">' +
     '<div class="tn-band"><span>' +
       esc(n.node_type === "EFFECT" ? "Skutek" : (layer && causeLayerAllowed(n) ? layer.name : (type ? type.name : n.node_type))) + '</span>' +
@@ -11071,7 +11157,9 @@ function addNode(parentId, preset){
   const isFirst = !nodes.length;
   const n = Object.assign({
     node_id: uid("nd"), event_id: ev.event_id, parent_node_id: parentId || null,
-    node_type: isFirst ? "EFFECT" : afterEffect ? "CAUSE" : "HYPOTHESIS",
+    /* rodzaj „Hipoteza" został wycofany — nowy bloczek jest przyczyną,
+       a to, czy jest potwierdzona, mówi status ustalenia                     */
+    node_type: isFirst ? "EFFECT" : "CAUSE",
     node_status: isFirst ? "POTWIERDZONA" : afterEffect ? "POTWIERDZONA" : "HIPOTEZA",
     title: isFirst ? (ev.problem_statement || ev.title || "Skutek zdarzenia") : "",
     description: "", cause_layer: isFirst ? "" : afterEffect ? "IMMEDIATE" : "",
@@ -12608,7 +12696,6 @@ function generateLesson(overwrite){
   const effects = [];
   if (Number(ev.shutdown_hours) > 0) effects.push("zatrzymanie produkcji przez " + num(ev.shutdown_hours,1) + " h");
   if (Number(ev.derate_hours) > 0) effects.push("ograniczenie produkcji o " + num(ev.derate_percent,0) + "% przez " + num(ev.derate_hours,1) + " h");
-  if (Number(ev.production_loss) > 0) effects.push("utrata produkcji " + num(ev.production_loss,1) + " t");
   if (Number(ev.pum_value) > 0) effects.push("potencjalna utrata marży " + num(ev.pum_value,2) + " mln PLN");
   if (Number(ev.asset_damage_cost) > 0) effects.push("koszt uszkodzeń majątku " + num(ev.asset_damage_cost,0) + " PLN");
   if (effects.length) whatParts.push("Skutki: " + effects.join(", ") + ".");
@@ -13464,7 +13551,6 @@ function buildReportHtml(ev){
     h += '<div class="pr-sec">' + sec(4,"Konsekwencje i straty") + '<table class="pr-tbl">' +
       '<tr><th style="width:180px">Czas zatrzymania produkcji</th><td>' + num(ev.shutdown_hours,2) + ' h</td></tr>' +
       '<tr><th>Czas ograniczenia produkcji</th><td>' + num(ev.derate_hours,2) + ' h (' + num(ev.derate_percent,0) + '%)</td></tr>' +
-      '<tr><th>Utrata produkcji</th><td>' + num(ev.production_loss,1) + ' t</td></tr>' +
       '<tr><th>PUM — potencjalna utrata marży</th><td><b>' + num(ev.pum_value,2) + ' mln PLN</b></td></tr>' +
       '<tr><th>Koszt uszkodzeń majątku</th><td>' + num(ev.asset_damage_cost,0) + ' PLN</td></tr>' +
       '<tr><th>Wpływ HSE / środowisko</th><td>' + esc(ev.hse_impact || "—") + ' / ' + esc(ev.env_impact || "—") + '</td></tr></table>';
@@ -13917,7 +14003,6 @@ function buildReportPdf(ev){
     doc.kv([
       ["Czas zatrzymania produkcji", num(ev.shutdown_hours,2) + " h"],
       ["Czas ograniczenia produkcji", num(ev.derate_hours,2) + " h  (" + num(ev.derate_percent,0) + "%)"],
-      ["Nieplanowana utrata produkcji", num(ev.production_loss,1) + " t"],
       ["PUM — potencjalna utrata marży", num(ev.pum_value,2) + " mln PLN"],
       ["Koszt uszkodzenia majątku", num(ev.asset_damage_cost,0) + " PLN"],
       ["Wpływ HSE / środowisko", (ev.hse_impact || "—") + " / " + (ev.env_impact || "—")]
@@ -14309,10 +14394,18 @@ function writeBlocked(action, ev){
   if (caseFinal(ev) && WRITE_ALLOWED_AFTER_APPROVAL[action]) return false;
   return true;
 }
+/* Pola decyzji zatwierdzającego: zablokowanie raportu nie może blokować
+   samego zatwierdzania — osoba akceptująca wpisuje uwagę i podpis.         */
+const POLA_ZATWIERDZANIA = { approver_id:1, approver_comment:1, approved_date:1, dissenting_opinion:1 };
+function poleZatwierdzania(path){
+  const m = /^event[.:](\w+)/.exec(path || "");
+  return !!(m && POLA_ZATWIERDZANIA[m[1]]);
+}
 function lockMessage(ev){
   return caseFinal(ev)
     ? "Raport jest zatwierdzony — treści analizy nie można zmieniać. Zmiana ustaleń wymaga aneksu (Moduł 8)."
-    : "Raport jest w zatwierdzaniu — żeby edytować, cofnij status do „W trakcie prac”.";
+    : "Raport czeka na decyzję — treść analizy jest zamknięta. Zatwierdzający może wpisać uwagę i podpis; " +
+      "żeby poprawić treść, cofnij status do „W trakcie prac” (bez aneksu).";
 }
 
 /* pasek informacyjny nad modułami sprawy */
@@ -15314,7 +15407,6 @@ const KPI_DEFS = [
   { id:"lossH",     group:"Dostępność",  label:"Utrata dostępności",         unit:"h",       calc:function(c){ return Math.round(sum(c.evts, function(e){ return (Number(e.shutdown_hours)||0); }) * 10)/10; } },
   { id:"stopH",     group:"Dostępność",  label:"Czas zatrzymania produkcji", unit:"h",       calc:function(c){ return Math.round(sum(c.evts, function(e){ return Number(e.shutdown_hours)||0; }) * 10)/10; } },
   { id:"derateH",   group:"Dostępność",  label:"Czas ograniczenia produkcji",unit:"h",       calc:function(c){ return Math.round(sum(c.evts, function(e){ return Number(e.derate_hours)||0; }) * 10)/10; } },
-  { id:"prodLoss",  group:"Dostępność",  label:"Utrata produkcji",           unit:"t",       calc:function(c){ return Math.round(sum(c.evts, function(e){ return Number(e.production_loss)||0; })); } },
 
   { id:"pum",       group:"Finanse",     label:"PUM — utrata marży",         unit:"mln PLN", calc:function(c){ return Math.round(sum(c.evts, function(e){ return Number(e.pum_value)||0; }) * 100)/100; } },
   { id:"damage",    group:"Finanse",     label:"Koszt uszkodzeń majątku",    unit:"PLN",     calc:function(c){ return Math.round(sum(c.evts, function(e){ return Number(e.asset_damage_cost)||0; })); } },
@@ -16005,7 +16097,7 @@ function chartBuilderBody(){
     '</div>' +
     '<div class="grid g3" style="gap:10px">' +
       '<div class="field" style="margin:0"><label>Długość podpisu (znaki)</label><select data-chartf="labelWrap">' +
-        [["","automatycznie"],["10","10"],["14","14"],["18","18"],["22","22"],["26","26"],["34","34"],["44","44"]]
+        [["","automatycznie"],["10","10"],["14","14"],["18","18"],["22","22"],["26","26"],["34","34"],["44","44"],["52","52"],["60","60"]]
           .map(function(o){ return '<option value="' + attr(o[0]) + '"' + ((sp.labelWrap || "") === String(o[0]) ? " selected" : "") +
             '>' + esc(o[1]) + '</option>'; }).join("") +
       '</select><div class="hint">Dłuższe nazwy przyczyn łam na tylu znakach, ile zmieści się na Twoim wykresie.</div></div>' +
@@ -17431,9 +17523,9 @@ function configEquipClasses(){
     '<div class="spacer"></div>' +
     '<button class="btn ghost sm" data-action="eqcls-reset">↺ Zestaw domyślny</button></div>' +
     '<div class="card-body tight"><div class="tbl-wrap"><table class="tbl"><thead><tr>' +
-      '<th style="width:60px">Kod</th><th>Klasa</th><th style="width:110px">Branża</th>' +
-      '<th class="tc" style="width:80px">Tryby</th><th class="tc" style="width:110px">Mechanizmy</th>' +
-      '<th class="tc" style="width:90px">Obiekty</th><th style="width:90px"></th></tr></thead><tbody>';
+      '<th style="width:50px">Kod</th><th>Klasa</th><th style="width:96px">Branża</th>' +
+      '<th class="tc" style="width:58px">Tryby</th><th class="tc" style="width:68px">Mech.</th>' +
+      '<th class="tc" style="width:64px">Obiekty</th><th style="width:72px"></th></tr></thead><tbody>';
   EQUIP_CLASS.forEach(function(x){
     const on = x.code === sel;
     h += '<tr' + (on ? ' class="sel"' : "") + '><td class="mono">' + esc(x.code) + '</td>' +
@@ -17453,8 +17545,9 @@ function configEquipClasses(){
   const modeOn = function(code){ return !c.modes || !c.modes.length || c.modes.indexOf(code) >= 0; };
   const mechOn = function(code){ return !c.mechs || !c.mechs.length || c.mechs.indexOf(code) >= 0; };
 
-  h += '<div class="card accent"><div class="card-head"><h3>' + esc(c.code + " — " + c.name) + '</h3>' +
-    '<span class="sub">tryby i mechanizmy widoczne przy tej klasie</span></div><div class="card-body">' +
+  h += '<div class="card accent"><div class="card-head"><h3>Edycja klasy: ' + esc(c.code + " — " + c.name) + '</h3>' +
+    '<span class="sub">zaznacz tryby uszkodzenia i mechanizmy, które zespół ma widzieć przy tej klasie obiektu</span>' +
+    '</div><div class="card-body">' +
     '<div class="grid g3" style="gap:10px">' +
       fieldText("Nazwa klasy","eqc_name", c.name, { bind:"eqclass:" + c.code + ".name" }) +
       fieldSelect("Branża wiodąca","eqc_disc", DISCIPLINE, c.disc, { bind:"eqclass:" + c.code + ".disc", empty:"— brak —" }) +
@@ -17974,7 +18067,7 @@ function renderNav(){
 const PROCESS_STEPS = ["m1","m2","m3","m4","m4b","m5","m6","m7"];
 /* etap sprawy wynikający ze statusu — używany poza modułami procesu */
 const STATUS_STEP = { POWOLANIE:"m1", PRACA_ZESPOLU:"m4", ZATWIERDZANIE:"m5",
-  ZATWIERDZONY:"m7", ZALECENIA_REALIZACJA:"m5", ZALECENIA_ZREALIZOWANO:"m6" };
+  ZATWIERDZONY:"m5", ZALECENIA_ZREALIZOWANO:"m6" };
 function stepLabel(id){
   const navItems = {};
   NAV.forEach(function(g){ g.items.forEach(function(it){ navItems[it.id] = it; }); });
@@ -18055,6 +18148,7 @@ function renderDesktop(){
   const act = document.activeElement;
   const keepBind = (act && act.getAttribute) ? act.getAttribute("data-bind") : null;
   const keepStart = (act && act.selectionStart != null) ? act.selectionStart : null;
+  const keepTop = (act && act.getBoundingClientRect) ? act.getBoundingClientRect().top : null;
   const keepScrollers = [];
   document.querySelectorAll(".canvas-wrap,.tbl-wrap,.tree-right").forEach(function(el, i){
     if (el.scrollLeft || el.scrollTop) keepScrollers.push([i, el.scrollLeft, el.scrollTop]);
@@ -18064,6 +18158,8 @@ function renderDesktop(){
   /* zamknięty raport zostaje w pełni widoczny — pola tylko wyszarzone */
   document.body.classList.toggle("case-locked",
     typeof caseLocked === "function" && caseLocked(curEvent()));
+  document.body.classList.toggle("case-final",
+    typeof caseFinal === "function" && caseFinal(curEvent()));
 
   const sdock = document.getElementById("stepHost");
   if (sdock) sdock.innerHTML = stepDockHtml();
@@ -18072,9 +18168,15 @@ function renderDesktop(){
   if (keepBind){
     const el = document.querySelector('[data-bind="' + keepBind.replace(/"/g,'\\"') + '"]');
     if (el && el.focus){
-      el.focus();
+      /* focus bez przewijania: inaczej przeglądarka skacze do pola i użytkownik
+         traci miejsce, w którym pisał                                        */
+      try { el.focus({ preventScroll:true }); } catch(e){ el.focus(); }
       if (keepStart != null && el.setSelectionRange){
         try { el.setSelectionRange(keepStart, keepStart); } catch(e){}
+      }
+      if (keepTop != null){
+        const teraz = el.getBoundingClientRect().top;
+        if (Math.abs(teraz - keepTop) > 2) window.scrollBy(0, teraz - keepTop);
       }
     }
   }
@@ -18131,8 +18233,13 @@ function applyBind(path, rawValue, isCheckbox){
   if (/^(event|why|node|fitem|lesson)[:.]/.test(path)){
     const evL = curEvent();
     if (evL && typeof caseLocked === "function" && caseLocked(evL)){
-      toastOnce("lock", lockMessage(evL));
-      return false;
+      /* w statusie „W zatwierdzaniu" otwarte zostają pola decyzji — uwaga
+         zatwierdzającego, podpis i zdanie odrębne                           */
+      const wyjatek = !caseFinal(evL) && typeof poleZatwierdzania === "function" && poleZatwierdzania(path);
+      if (!wyjatek){
+        toastOnce("lock", lockMessage(evL));
+        return false;
+      }
     }
   }
   /* ustawienia i progi */
@@ -18807,6 +18914,14 @@ document.addEventListener("click", function(e){
     case "rec-filter": S.recFilter = code; render(); break;
     case "eqcls-sel": S.equipCfgSel = code; render(); break;
     case "eqcls-reset": equipClassReset(); break;
+    case "side-toggle": {
+      /* zwinięte menu zostaje zapamiętane — przy pracy na jednej sprawie
+         szerokość ekranu bywa cenniejsza niż stała nawigacja              */
+      const zwin = !document.body.classList.contains("side-collapsed");
+      document.body.classList.toggle("side-collapsed", zwin);
+      try { localStorage.setItem("rca_side", zwin ? "1" : "0"); } catch(e){}
+      break;
+    }
     case "case-annex": annexModal(); break;
     case "fitem-add": {
       const evF = curEvent();
@@ -19431,6 +19546,14 @@ document.addEventListener("change", function(e){
     else if (imp === "headerRow"){ S.importPreview.headerRow = Number(el.value); S.importPreview.mapping = null; }
     prepareImportMapping(); render(); return;
   }
+  /* tabela krzyżowa przyczyn — zmiana wymiaru, miary albo liczby wierszy */
+  const pv = el.getAttribute && el.getAttribute("data-pivot");
+  if (pv){
+    S.causePivot = S.causePivot || { dim:"fc", dim2:"evcat", metric:"lossH", top:15 };
+    S.causePivot[pv] = (pv === "top") ? (Number(el.value) || 15) : el.value;
+    render();
+    return;
+  }
   /* tryby i mechanizmy dopuszczone dla klasy wyposażenia */
   const eqm = el.getAttribute && (el.getAttribute("data-eqmode") || el.getAttribute("data-eqmech"));
   if (eqm){
@@ -19708,6 +19831,21 @@ function migrate(db){
   if (db.settings.eurRate === undefined) db.settings.eurRate = 4.30;
   if (db.settings.riskGrid === undefined) db.settings.riskGrid = null;
 
+  /* 2.4.0 — sześć branż wiodących; dawne kody przechodzą na „Produkcja" */
+  if (!db.settings.disciplineV2){
+    const mapa = { PRC:"PRO", OPR:"PRO", HSE:"PRO" };
+    db.events.forEach(function(e){ if (mapa[e.discipline_code]) e.discipline_code = mapa[e.discipline_code]; });
+    db.fiveWhys.concat(db.causeNodes).forEach(function(x){
+      if (mapa[x.discipline_code]) x.discipline_code = mapa[x.discipline_code];
+    });
+    db.settings.disciplineV2 = true;
+  }
+  /* 2.4.0 — status „Zalecenia — realizacja" scalony z „Zatwierdzony" */
+  if (!db.settings.statusV2){
+    db.events.forEach(function(e){ if (e.main_status === "ZALECENIA_REALIZACJA") e.main_status = "ZATWIERDZONY"; });
+    db.settings.statusV2 = true;
+  }
+
   /* 2.3.2 — kody przyczyn zostają wyłącznie na wniosku analizy.
      Wartości z ogniw pośrednich zdejmujemy, żeby statystyka nie liczyła kodów,
      których interfejs już nie pozwala wpisać.                               */
@@ -19859,6 +19997,7 @@ function migrate(db){
 
 function boot(){
   uiApply();
+  try { if (localStorage.getItem("rca_side") === "1") document.body.classList.add("side-collapsed"); } catch(e){}
   Store.open().then(function(){ return Store.load(); }).then(function(data){
     if (data && Array.isArray(data.events)){
       const fresh = emptyDb();
@@ -21667,9 +21806,14 @@ function i18nStepLabel(t){
   return I18N_EN[s] || s;
 }
 function i18nPattern(txt){
+  /* Wzorzec, który pasuje, ale nie umie przetłumaczyć (brak hasła w słowniku),
+     oddaje tekst bez zmian — wtedy próbujemy kolejnych wzorców zamiast
+     kończyć na pierwszym trafieniu.                                        */
   for (let i = 0; i < I18N_PATTERNS.length; i++){
     const p = I18N_PATTERNS[i];
-    if (p[0].test(txt)) return txt.replace(p[0], p[1]);
+    if (!p[0].test(txt)) continue;
+    const out = txt.replace(p[0], p[1]);
+    if (out && out !== txt) return out;
   }
   return i18nComposite(txt);
 }
@@ -21703,6 +21847,7 @@ const I18N_COUNT = {
   "zmiana":"change", "zmiany":"changes", "zmian":"changes",
   "pozycji":"items", "spraw":"cases", "zaleceń":"recommendations", "zdarzeń":"events"
 };
+let I18N_SEG_GUARD = false;
 function i18nSegment(seg){
   const t = seg.trim();
   if (!t) return seg;
@@ -21716,6 +21861,18 @@ function i18nSegment(seg){
     return (I18N_EN[g[0].trim()] || g[0].trim()) + " — " + (I18N_EN[g[1].trim()] || g[1].trim());
   const cnt = /^(\d+)\s+(.+)$/.exec(t);
   if (cnt && I18N_COUNT[cnt[2]]) return cnt[1] + " " + I18N_COUNT[cnt[2]];
+  /* segment bywa całym zdaniem z liczbą — próbujemy wzorców, pilnując,
+     żeby nie wpaść w pętlę (wzorce wołają składanie)                        */
+  if (!I18N_SEG_GUARD){
+    I18N_SEG_GUARD = true;
+    try {
+      for (let i = 0; i < I18N_PATTERNS.length; i++){
+        if (!I18N_PATTERNS[i][0].test(t)) continue;
+        const out = t.replace(I18N_PATTERNS[i][0], I18N_PATTERNS[i][1]);
+        if (out && out !== t) return out;
+      }
+    } finally { I18N_SEG_GUARD = false; }
+  }
   return i18nMonth(t);
 }
 function i18nComposite(txt){
@@ -21771,13 +21928,19 @@ function translateNode(root){
     if (t && t !== raw) node.nodeValue = node.nodeValue.replace(raw, t);
   });
 
+  /* podpowiedzi i tytuły też przechodzą przez wzorce — inaczej zostawały
+     po polsku napisy składane w rodzaju „Liczba zdarzeń wg: miesiąc"       */
   root.querySelectorAll("[placeholder]").forEach(function(el){
-    const t = I18N_EN[(el.getAttribute("placeholder") || "").trim()];
-    if (t) el.setAttribute("placeholder", t);
+    const raw = (el.getAttribute("placeholder") || "").trim();
+    if (!raw) return;
+    const t = i18nLookup(raw) || i18nPattern(raw);
+    if (t && t !== raw) el.setAttribute("placeholder", t);
   });
   root.querySelectorAll("[title]").forEach(function(el){
-    const t = I18N_EN[(el.getAttribute("title") || "").trim()];
-    if (t) el.setAttribute("title", t);
+    const raw = (el.getAttribute("title") || "").trim();
+    if (!raw) return;
+    const t = i18nLookup(raw) || i18nPattern(raw);
+    if (t && t !== raw) el.setAttribute("title", t);
   });
   root.querySelectorAll("option").forEach(function(el){
     const raw = el.textContent.trim();
@@ -21833,6 +21996,8 @@ const DICT_EN = {
   FREQUENCY: { F1:"F1 — Single occurrence", F2:"F2 — Recurring", F3:"F3 — Cyclic" },
   RANK: { P1:"P1 — Registration", P2:"P2 — Light RCA", P3:"P3 — Full RCA", P4:"P4 — Emergency mode" },
   PHASE: { NO:"Normal operation", SU:"Start-up", SD:"Shutdown", STB:"Standstill / stand-by" },
+  DISCIPLINE_NEW: { MSE:"Static mechanical", MRE:"Rotating machinery", ELE:"Electrical",
+                   AUT:"Instrumentation and control", PRO:"Production", CIV:"Civil works" },
   DISCIPLINE: { MECH:"Mechanical", ELEC:"Electrical", AKPIA:"Instrumentation and control",
                 PROC:"Process", UR:"Maintenance", HSE:"HSE / safety", MRE:"Rotating equipment",
                 CIV:"Civil", IT:"IT / OT", INNE:"Other" },
@@ -21866,7 +22031,7 @@ const DICT_EN = {
   CONSEQUENCE_LEVELS: { "0":"0 — No impact", "1":"1 — Slight", "2":"2 — Minor", "3":"3 — Major",
                         "4":"4 — Severe", "5":"5 — Catastrophic" },
   MAIN_STATUS: { POWOLANIE:"Appointed", PRACA_ZESPOLU:"In progress", ZATWIERDZANIE:"Under approval",
-                 ZATWIERDZONY:"Approved", ZALECENIA_REALIZACJA:"Recommendations in progress",
+                 ZATWIERDZONY:"Approved — recommendations in progress",
                  ZALECENIA_ZREALIZOWANO:"Recommendations completed" },
   ROLES: { ADMIN:"Tool administrator", LEADER:"RCA leader", MEMBER:"Team member",
            APPROVER:"Approver", VIEWER:"Data consumer" },
@@ -21941,6 +22106,651 @@ function dictNameEn(dict, code){
   const tab = key && DICT_EN[key];
   return tab && tab[code] ? tab[code] : null;
 }
+
+
+/* =====================================================================
+   23c. SŁOWNIK ANGIELSKI — UZUPEŁNIENIE PEŁNE
+        Nazwy słownikowe (ISO 14224, klasy wyposażenia, sposoby wykrycia)
+        oraz wszystkie napisy interfejsu wychwycone audytem wersji 2.4.1.
+        Dzięki temu w trybie angielskim nie zostaje ani jedno polskie słowo
+        poza treścią spraw, która jest danymi użytkownika.
+   ===================================================================== */
+
+/* --- nazwy ze słowników procesu --- */
+Object.assign(I18N_EN, {
+  /* tryby uszkodzenia ISO 14224 */
+  "Nieprawidłowe wskazanie przyrządu":"Abnormal instrument reading",
+  "Awaria całkowita":"Breakdown",
+  "Nieszczelność zewnętrzna — medium procesowe":"External leakage — process medium",
+  "Nieszczelność zewnętrzna — media pomocnicze":"External leakage — utility medium",
+  "Sygnał niestabilny":"Erratic output",
+  "Brak startu na żądanie":"Fail to start on demand",
+  "Brak realizacji funkcji na żądanie":"Fail to function on demand",
+  "Wydajność powyżej zakresu":"High output",
+  "Nieszczelność wewnętrzna":"Internal leakage",
+  "Wydajność poniżej zakresu":"Low output",
+  "Hałas":"Noise",
+  "Przegrzanie":"Overheating",
+  "Odchylenie parametru":"Parameter deviation",
+  "Zatkanie / zapchanie":"Plugged / choked",
+  "Drobne problemy eksploatacyjne":"Minor in-service problems",
+  "Wada konstrukcyjna":"Structural deficiency",
+  "Brak zatrzymania na żądanie":"Fail to stop on demand",
+  "Zatrzymanie samoczynne":"Spurious stop",
+  "Nadmierne drgania":"Vibration",
+  "Przeciek armatury w pozycji zamkniętej":"Valve leakage in closed position",
+  "Inny":"Other", "Nieznany":"Unknown",
+
+  /* mechanizmy uszkodzenia ISO 14224 */
+  "Mechaniczny — ogólny":"Mechanical — general",
+  "Mechaniczny — nieszczelność":"Mechanical — leakage",
+  "Mechaniczny — drgania":"Mechanical — vibration",
+  "Mechaniczny — luz / osiowanie":"Mechanical — clearance / alignment",
+  "Mechaniczny — odkształcenie":"Mechanical — deformation",
+  "Mechaniczny — poluzowanie":"Mechanical — looseness",
+  "Mechaniczny — zakleszczenie":"Mechanical — sticking",
+  "Materiałowy — ogólny":"Material — general",
+  "Materiałowy — kawitacja":"Material — cavitation",
+  "Materiałowy — korozja":"Material — corrosion",
+  "Materiałowy — erozja":"Material — erosion",
+  "Materiałowy — zużycie":"Material — wear",
+  "Materiałowy — pęknięcie / złamanie":"Material — breakage",
+  "Materiałowy — zmęczenie":"Material — fatigue",
+  "Materiałowy — przegrzanie":"Material — overheating",
+  "Materiałowy — rozerwanie":"Material — burst",
+  "AKPiA — ogólny":"Instrument — general",
+  "AKPiA — błąd regulacji":"Instrument — control failure",
+  "AKPiA — brak sygnału / alarmu":"Instrument — no signal or alarm",
+  "AKPiA — sygnał błędny":"Instrument — faulty signal",
+  "AKPiA — rozregulowanie":"Instrument — out of adjustment",
+  "AKPiA — błąd oprogramowania":"Instrument — software failure",
+  "AKPiA — uszkodzenie wspólnej przyczyny":"Instrument — common cause failure",
+  "Elektryczny — ogólny":"Electrical — general",
+  "Elektryczny — zwarcie":"Electrical — short circuit",
+  "Elektryczny — przerwa obwodu":"Electrical — open circuit",
+  "Elektryczny — brak zasilania":"Electrical — no power",
+  "Elektryczny — zasilanie wadliwe":"Electrical — faulty power",
+  "Elektryczny — uszkodzenie izolacji":"Electrical — insulation fault",
+  "Wpływ zewnętrzny — ogólny":"External influence — general",
+  "Wpływ zewnętrzny — zablokowanie":"External influence — blockage",
+  "Wpływ zewnętrzny — zanieczyszczenie":"External influence — contamination",
+  "Wpływ zewnętrzny — inny":"External influence — other",
+  "Różne — ogólny":"Miscellaneous — general",
+  "Różne — nie ustalono przyczyny":"Miscellaneous — no cause found",
+  "Różne — przyczyny złożone":"Miscellaneous — combined causes",
+  "Różne — inny":"Miscellaneous — other",
+  "Różne — nieznany":"Miscellaneous — unknown",
+
+  /* klasy wyposażenia ISO 14224 */
+  "Pompy":"Pumps", "Sprężarki":"Compressors", "Turbiny":"Turbines",
+  "Silniki elektryczne":"Electric motors", "Wentylatory i dmuchawy":"Fans and blowers",
+  "Mieszadła i agitatory":"Agitators and mixers",
+  "Aparaty ciśnieniowe (kolumny, separatory, reaktory)":"Pressure vessels (columns, separators, reactors)",
+  "Wymienniki ciepła":"Heat exchangers", "Rurociągi i armatura procesowa":"Piping and process valves",
+  "Armatura odcinająca i zwrotna":"Isolation and check valves", "Zbiorniki magazynowe":"Storage tanks",
+  "Piece i kotły":"Fired heaters and boilers", "Filtry i separatory mechaniczne":"Filters and mechanical separators",
+  "Przyrządy pomiarowe (przetworniki)":"Measuring instruments (transmitters)",
+  "Zawory regulacyjne i siłowniki":"Control valves and actuators",
+  "Urządzenia zabezpieczające (PSV, przeponowe)":"Safety devices (PSV, rupture discs)",
+  "Układy sterowania (DCS, PLC, SIS)":"Control systems (DCS, PLC, SIS)",
+  "Systemy bezpieczeństwa (ESD, F&G, ppoż.)":"Safety systems (ESD, F&G, fire)",
+  "Transformatory":"Transformers", "Rozdzielnice i aparatura łączeniowa":"Switchgear",
+  "Zasilanie gwarantowane (UPS, baterie, agregaty)":"Backup power (UPS, batteries, gensets)",
+  "Węzeł technologiczny (bez uszkodzenia obiektu)":"Process node (no equipment failure)",
+  "Obiekty budowlane i konstrukcje":"Civil structures",
+  "Inny obiekt — poza klasyfikacją":"Other item — outside the classification",
+
+  /* branże wiodące */
+  "Mechanika statyczna":"Static mechanical", "Maszyny wirujące":"Rotating machinery",
+  "Elektryka":"Electrical", "Automatyka":"Instrumentation and control",
+  "Produkcja":"Production", "Budownictwo":"Civil works",
+
+  /* kody przyczyn FC — nazwy */
+  "Zarządcze / proceduralne — Ogólne":"Management / procedural — general",
+  "Zarządcze — Błąd dokumentacji / procedur":"Management — documentation or procedure error",
+  "Zarządcze — Błąd zarządczy / organizacyjny":"Management — managerial or organizational error",
+
+  /* częstotliwość i dotkliwość */
+  "F2 — Nawracające":"F2 — Recurring", "S3 — Poważny":"S3 — Serious"
+});
+
+/* --- napisy interfejsu wychwycone audytem --- */
+Object.assign(I18N_EN, {
+  "+ Dodaj jednostkę":"+ Add unit", "+ Dodaj pozycję":"+ Add item",
+  "1. Co się stało (kiedy, gdzie, co, z jakim skutkiem)":"1. What happened (when, where, what, with what effect)",
+  "4. Zalecenia i działania":"4. Recommendations and actions",
+  "5 poziomów — treść wpisujesz wprost w bloczku":"five levels — type straight into the block",
+  "Analityka — zapisane układy":"Analytics — saved layouts",
+  "Automat usuwa nazwy instalacji, TAG-i urządzeń, nazwiska i numery spraw. Przed publikacją zweryfikuj treść.":
+    "The generator removes installation names, equipment TAGs, personal names and case numbers. Check the text before publishing.",
+  "Biblioteka biuletynów":"Bulletin library", "Bieżący użytkownik":"Current user",
+  "Branża odpowiedzialna za usunięcie tej przyczyny — podpowiedź wynika z klasy obiektu.":
+    "The discipline responsible for removing this cause — suggested from the equipment class.",
+  "Co się stało (opis z powołania — Moduł 1)":"What happened (description from the appointment — Module 1)",
+  "Czynność":"Action",
+  "Dla rangi P3 powołuje: Dyrektor Biura Techniki":"For rank P3 the appointing authority is: Director of Engineering",
+  "Dla rangi P3 powołuje Dyrektor Biura Techniki, a wskazano Dyrektor Produkcji.":
+    "For rank P3 the Director of Engineering appoints the team, but the Production Director was named.",
+  "Dokument powołania zespołu generujesz w Module 1 — Appointment and classification.":
+    "The team appointment document is generated in Module 1 — Appointment and classification.",
+  "Elementy wspólne":"Shared elements",
+  "Generator treści":"Content generator", "Generuj powołanie (PDF)":"Generate appointment (PDF)",
+  "Głębsza przyczyna HFACS (poziom 2-4)":"Deeper HFACS cause (levels 2–4)",
+  "Ile dni pamiętać zalogowanie":"How many days to remember the login",
+  "Jednostka nadrzędna":"Parent unit", "Kod jednostki nadrzędnej":"Parent unit code",
+  "Klasa wyposażenia zawęża kaskadę":"The equipment class narrows the cascade",
+  "Każdy pakiet ma okładkę z zakresem i okresem, stopkę z numeracją slajdów oraz wykresy renderowane z aktualnych danych.":
+    "Every package has a cover with scope and period, a footer with slide numbers and charts rendered from current data.",
+  "Lista zawężona do klasy CO":"List narrowed to class CO",
+  "Mapa zakładu z drążeniem":"Plant map with drill-down",
+  "Mapa łańcucha przyczyn (mini-diagram)":"Cause chain map (mini diagram)",
+  "Materiał dowodowy":"Evidence", "Moduł 1":"Module 1", "Moduł 2":"Module 2", "Moduł 3":"Module 3",
+  "Moduł 4":"Module 4", "Moduł 5":"Module 5", "Moduł 6":"Module 6", "Moduł 7":"Module 7", "Moduł 8":"Module 8",
+  "Nazwa firmy / zakładu":"Company / plant name",
+  "Aplikacja nie odwołuje się do żadnych serwerów, API ani CDN.":
+    "The application does not call any server, API or CDN.",
+  "Brak połączeń sieciowych":"No network connections",
+  "Odznaczenie wszystkich pozycji oznacza „pokazuj pełny słownik” — przydatne przy klasie „Inny obiekt”.":
+    "Clearing every item means show the full dictionary — useful for the Other item class.",
+  "Ogranicza pulpit do wybranego zakładu, bloku albo instalacji.":
+    "Limits the dashboard to the selected plant, unit or installation.",
+  "Opis konsekwencji = poziom dla danego wymiaru · numer w kolumnie Lvl = sam poziom bez wskazania wymiaru · litera N/L/M/H = poziom razem z kolumną rankingu.":
+    "Consequence description = level for that dimension · the number in the Lvl column = level alone · the letter N/L/M/H = level combined with the ranking column.",
+  "Otwórz sprawę":"Open case",
+  "PUM — potencjalna utrata marży":"PUM — potential margin loss",
+  "PUM — potencjalna utrata marży [mln PLN]":"PUM — potential margin loss [PLN m]",
+  "Paczka zawiera sprawę, bloczki analizy, dotychczasowe dowody i zdjęcia.":
+    "The package contains the case, analysis blocks, evidence collected so far and photos.",
+  "Panel aktywnych zespołów RCA":"Active RCA teams panel",
+  "Po tym czasie aplikacja poprosi o hasło ponownie. Wylogowanie ręczne jest zawsze dostępne w panelu bocznym.":
+    "After that time the application asks for the password again. Manual logout is always available in the sidebar.",
+  "Podgląd układu":"Layout preview", "Podpowiadany jako autor dowodów i decyzji.":"Suggested as the author of evidence and decisions.",
+  "Pole współdzielone z Modułem 1 — zmiana tutaj aktualizuje także dokument powołania po jego ponownym wygenerowaniu.":
+    "Field shared with Module 1 — a change here also updates the appointment document once it is generated again.",
+  "Potwierdza przyczynę":"Confirms the cause", "Pozostałe sekcje pulpitu":"Other dashboard sections",
+  "Przejdź do zaleceń CAPA →":"Go to CAPA recommendations →",
+  "Przycisk Generuj powołanie (PDF) tworzy gotowy dokument z aktualnych danych. Poniższa treść to wersja robocza — jeśli ją zmienisz, PDF wykorzysta Twoją wersję.":
+    "The Generate appointment (PDF) button builds the document from current data. The text below is a draft — if you edit it, the PDF uses your version.",
+  "Przyczyny źródłowe wskazują kilka branż — wymagana decyzja zespołu":
+    "The root causes point to several disciplines — the team must decide",
+  "Próg nr 1 [PLN]":"Threshold 1 [PLN]", "Próg nr 2 [PLN]":"Threshold 2 [PLN]",
+  "Próg nr 3 [PLN]":"Threshold 3 [PLN]", "Próg nr 4 [PLN]":"Threshold 4 [PLN]",
+  "REG-09 — pogłębienie czynnika ludzkiego":"REG-09 — deepening the human factor",
+  "Kod poziomu 1 nie może kończyć analizy. Wskaż głębszą przyczynę albo opisz lukę systemową.":
+    "A level 1 code cannot end the analysis. Point to a deeper cause or describe the systemic gap.",
+  "Raport kontrolny — kompletność":"Control report — completeness",
+  "Raport kompletny w zakresie krytycznym":"Report complete in the critical scope",
+  "Wszystkie obowiązkowe elementy są uzupełnione.":"Every mandatory item is filled in.",
+  "Raport zapisuje się jako plik PDF i otwiera w nowej karcie — bez okna drukowania. Format A4 z numeracją stron i wykazem załączników.":
+    "The report is saved as a PDF and opens in a new tab — no print dialog. A4 format with page numbers and an attachment list.",
+  "Rozbicie wskaźników":"Indicator breakdown",
+  "S wynika z poziomu konsekwencji, F z rankingu incydentów — oba wskazujesz poniżej.":
+    "S comes from the consequence level, F from the incident ranking — you set both below.",
+  "Schemat przyczynowo-skutkowy — pisz bezpośrednio w bloczku":"Cause-and-effect chart — type straight into the block",
+  "Sekcja 11.3 — akceptacja ustaleń i listy zaleceń":"Section 11.3 — acceptance of findings and the recommendation list",
+  "Skutek S \\ Częstotliwość F":"Severity S \\ Frequency F",
+  "Slajdy: tytuł, kluczowe wskaźniki, definicja problemu, oś czasu, drzewo/5 Why, przyczyny, zalecenia, wnioski.":
+    "Slides: title, key indicators, problem definition, timeline, tree / 5 Why, causes, recommendations, conclusions.",
+  "Szczegóły":"Details", "Tabela powiązań przyczyn":"Cause link table",
+  "Ten opis trafia do dokumentu powołania oraz do Modułu 2 (definicja problemu).":
+    "This description goes into the appointment document and into Module 2 (problem definition).",
+  "Termin liczy się od daty powołania zespołu. Ręczna zmiana terminu w sprawie ma pierwszeństwo przed podpowiedzią.":
+    "The deadline runs from the appointment date. A deadline set manually in the case takes precedence over the suggestion.",
+  "Treść biuletynu":"Bulletin content", "Tryby zawężone do 15 pozycji":"Modes narrowed to 15 items",
+  "Typ powołanego zespołu":"Type of appointed team", "Tytuł biuletynu":"Bulletin title",
+  "Tytuł zdarzenia / Opis problemu":"Event title / problem description",
+  "W przygotowaniu na Twój plik":"Waiting for your file",
+  "Warstwę przyczynową ustawia się wyłącznie na bloczku rodzaju „Przyczyna” — ten bloczek to Skutek.":
+    "The cause layer is set only on blocks of type Cause — this block is an Effect.",
+  "Wartość trafia do raportu, statystyk pulpitu i analizy trendów wg branż.":
+    "The value goes into the report, the dashboard statistics and the discipline trend analysis.",
+  "Widoczność okien i reguły aktywności":"Card visibility and activity rules",
+  "Wpływ HSE / środowisko":"HSE / environmental impact",
+  "Wskaźniki na pulpicie":"Dashboard indicators", "Wybór słownika":"Dictionary selection",
+  "Wyczyszczenie usuwa wszystkie sprawy, analizy, pliki i konfigurację z tej przeglądarki.":
+    "Clearing removes every case, analysis, file and setting from this browser.",
+  "Wyczyszczenie danych witryny usunie bazę. Wykonuj regularne kopie JSON.":
+    "Clearing site data deletes the database. Make regular JSON backups.",
+  "Dane w przeglądarce":"Data in the browser",
+  "Wyłączone — wymiana plikami paczek":"Off — exchange through package files",
+  "Własne systemy kodowania":"Custom coding systems",
+  "Zakres (jednostka nadrzędna)":"Scope (parent unit)",
+  "Zdanie odrębne jest dołączane do raportu RCA i musi zostać rozpatrzone przed zatwierdzeniem.":
+    "A dissenting opinion is attached to the RCA report and must be considered before approval.",
+  "Zdjęcia i wnioski wchodzą do rejestru dowodów właściwej sprawy. Bloczki analizy zmienione w terenie nadpisują wersję biurową tylko wtedy, gdy są nowsze.":
+    "Photos and findings go into the evidence register of the right case. Analysis blocks edited in the field overwrite the office version only when they are newer.",
+  "Zespół i dokument powołania":"Team and appointment document",
+  "automat czyta: klasyfikację, konsekwencje, analizę, kody i zalecenia":
+    "the generator reads: classification, consequences, analysis, codes and recommendations",
+  "cała konfiguracja bez danych spraw — do przeniesienia na inne stanowisko":
+    "the whole configuration without case data — to move to another workstation",
+  "czynności procesowe: powołania, zmiany statusu, decyzje — poza osią czasu zdarzenia":
+    "process actions: appointments, status changes, decisions — outside the event timeline",
+  "kategoria PD — nie jest utratą dostępności":"category PD — not an availability loss",
+  "kategoria PS — liczy się do utraty dostępności":"category PS — counts towards availability loss",
+  "kod branży przypisuje się do przyczyny źródłowej, nie do ogniw pośrednich":
+    "the discipline code belongs to the root cause, not to intermediate links",
+  "liczba dni od powołania — podpowiadana automatycznie przy wyznaczaniu terminu":
+    "days from the appointment — suggested automatically when setting the deadline",
+  "macierz ryzyka — wiersz „Ranking incydentów”":"risk matrix — the incident ranking row",
+  "majątek licz z PUM i kosztów (macierz ustawia wiersz automatycznie)":
+    "derive the asset level from PUM and costs (the matrix sets the row automatically)",
+  "pokaż tabelę wskaźników w podziale na jednostki":"show the indicator table split by unit",
+  "pole aktywne po wskazaniu poziomu w kolumnie Ludzie w macierzy ryzyka (Moduł 1)":
+    "active once a level is set in the People column of the risk matrix (Module 1)",
+  "pole aktywne po wskazaniu poziomu w kolumnie Środowisko w macierzy ryzyka (Moduł 1)":
+    "active once a level is set in the Environment column of the risk matrix (Module 1)",
+  "siatka: kolumna / wiersz / szerokość / wysokość (w komórkach)":"grid: column / row / width / height (in cells)",
+  "te same typy wykresów co w analityce — liczone na filtrach pulpitu":
+    "the same chart types as in analytics — calculated on the dashboard filters",
+  "ustawienie domyślne":"default setting",
+  "używane przy automatycznym wyliczaniu poziomu S":"used when the S level is calculated automatically",
+  "widoczność kolumn w zakładce Rejestr oraz w eksportach XLSX / PDF":
+    "column visibility in the register and in XLSX / PDF exports",
+  "wymiar organizacyjny dla wskaźników i wykresów pulpitu":
+    "organizational dimension for the dashboard indicators and charts",
+  "zaznacz karty KPI, które mają być widoczne u góry pulpitu":
+    "tick the KPI cards to show at the top of the dashboard",
+  "zaznacz tryby uszkodzenia i mechanizmy, które zespół ma widzieć przy tej klasie obiektu":
+    "tick the failure modes and mechanisms the team should see for this equipment class",
+  "↳ Pokaż wiersz 3 w macierzy":"↳ Show row 3 in the matrix",
+  "↺ Przywróć domyślne":"↺ Restore defaults", "↺ Przywróć domyślną":"↺ Restore the default",
+  "↺ Przywróć gotowe profile":"↺ Restore the built-in profiles", "↺ Ustawienia domyślne":"↺ Default settings",
+  "⇦ Przenieś z analityki":"⇦ Bring over from analytics",
+  "✉ Przypomnienia do zespołu":"✉ Reminders to the team",
+  "⟳ Uzupełnij puste pola":"⟳ Fill the empty fields", "⟳ Uzupełnij wpisy bazowe":"⟳ Fill the base entries",
+  "🕶 Odśwież wersję anonimową":"🕶 Refresh the anonymised version",
+  "🖼 Wybierz zdjęcia":"🖼 Select photos",
+  "Kody przyczyn — do uzupełnienia":"Cause codes — to be filled in",
+  "Kody przyczyn — tylko na przyczynie źródłowej i latentnej":"Cause codes — only on the root and latent cause",
+  "Kod przyczyny FC (ISO 14224) — grupa zarządcza":"Failure cause FC (ISO 14224) — management group",
+  "Załączniki graficzne (zdjęcia)":"Image attachments (photos)",
+  "Obciążenie, parametry procesowe, zachowanie układu przed zdarzeniem":
+    "Load, process parameters, system behaviour before the event",
+  "Odpowiedź — co ustalono na tym poziomie":"Answer — what was established at this level",
+  "Pytanie tego poziomu — dlaczego doszło do stanu z poziomu wyżej?":
+    "Question for this level — why did the state above occur?",
+  "Węzły, układy i obiekty objęte analizą":"Nodes, systems and items covered by the analysis",
+  "np. Dyrektor Techniczny — imię i nazwisko":"e.g. Technical Director — first and last name",
+  "np. Przegląd RCA — III kwartał":"e.g. RCA review — Q3",
+  "np. zapisy trendów DCS, protokół oględzin, zeznanie operatora":
+    "e.g. DCS trend records, inspection protocol, operator statement",
+  "np. łożysko oporowe po stronie napędu, przebieg 41 000 h od ostatniego remontu":
+    "e.g. thrust bearing on the drive side, 41,000 h since the last overhaul",
+  "numer, tytuł, lider…":"number, title, leader…", "treść, właściciel, sprawa":"text, owner, case",
+  "odśrodkowa":"centrifugal",
+  "Kliknij „Odśwież treść”, aby wygenerować dokument…":"Click Refresh content to generate the document…",
+  "Straty łącznie":"Total losses",
+  "Sugestia dla rangi P3: 30 dni od powołania":"Suggestion for rank P3: 30 days from the appointment",
+  "termin uzupełniany automatycznie":"deadline filled automatically"
+});
+
+/* --- wzorce dla nazw słownikowych z kodem z przodu --- */
+(function(){
+  /* „FM-2.4 Materiałowy — zużycie" oraz „CO — Sprężarki": kod zostaje,
+     nazwa idzie przez słownik. Dzięki temu nie trzeba wpisywać setek
+     złożeń kod + nazwa.                                                     */
+  I18N_PATTERNS.unshift(
+    [/^([A-Z]{2,4}[-.\d]*)\s+—\s+(.+)$/, function(m, kod, nazwa){
+      const t = I18N_EN[nazwa.trim()];
+      return t ? kod + " — " + t : m;
+    }],
+    [/^([A-Z]{2,4}[-.\d]*)\s+(.{3,})$/, function(m, kod, nazwa){
+      const t = I18N_EN[nazwa.trim()];
+      return t ? kod + " " + t : m;
+    }]
+  );
+
+  /* „Brak X" i „Wszystkie X" tłumaczymy tylko wtedy, gdy znamy rzeczownik —
+     inaczej powstawały potworki w rodzaju „No startu na żądanie".           */
+  const napraw = function(zrodlo, prefiks){
+    for (let i = 0; i < I18N_PATTERNS.length; i++){
+      if (String(I18N_PATTERNS[i][0]) === zrodlo){
+        I18N_PATTERNS[i] = [I18N_PATTERNS[i][0], function(m, x){
+          const slowo = i18nWord(x);
+          if (slowo && slowo !== x) return prefiks + " " + slowo;
+          const cale = I18N_EN[m];
+          return cale || m;
+        }];
+        return;
+      }
+    }
+  };
+  napraw("/^Brak (.+)$/", "No");
+  napraw("/^Wszystkie (.+)$/", "All");
+})();
+
+/* --- słowa używane w napisach składanych --- */
+Object.assign(I18N_WORDS, {
+  "klasę":"class", "tryb":"mode", "mechanizm":"mechanism", "status":"status",
+  "przyczynę":"cause", "obiekt":"item", "jednostkę":"unit", "poziom":"level",
+  "branżę":"discipline", "kategorię":"category", "zespół":"team", "wykres":"chart",
+  "pozycję":"item", "słownik":"dictionary", "profil":"profile", "sprawę":"case",
+  "zdarzenie":"event", "zalecenie":"recommendation", "zadanie":"task", "dowód":"evidence",
+  "branże":"disciplines", "zespołów":"teams", "jednostek":"units", "klas":"classes",
+  "elementów":"elements", "wpisów":"entries", "systemów kodowania":"coding systems",
+  "poziomów":"levels", "obiektów w sprawach":"items in cases"
+});
+
+
+/* =====================================================================
+   DRUGA TURA — napisy składane i opisy
+   ===================================================================== */
+Object.assign(I18N_EN, {
+  /* opisy ról (treść po pogrubionym tytule w alertach) */
+  "Pełny dostęp, konfigurator, zarządzanie kontami i repozytorium.":
+    "Full access, configurator, account and repository management.",
+  "Rejestruje zdarzenia i prowadzi sprawy od powołania do raportu.":
+    "Registers events and runs cases from appointment to report.",
+  "Pracuje w sprawach: zadania, dowody, wpisy analizy. Bez kasowania spraw.":
+    "Works inside cases: tasks, evidence, analysis entries. Cannot delete cases.",
+  "Zatwierdza raporty i rozstrzyga wnioski o zmianę zaleceń.":
+    "Approves reports and decides on recommendation change requests.",
+  "Pulpit, analityka i rejestry w trybie odczytu.":"Dashboard, analytics and registers in read-only mode.",
+
+  /* generator biuletynu */
+  "przyczyna bezpośrednia, źródłowa, latentna i czynniki":
+    "direct, root and latent cause plus contributing factors",
+  "data, lokalizacja, kategoria, skutki i konsekwencje":
+    "date, location, category, effects and consequences",
+
+  /* kopie i eksporty */
+  "JSON — pełna kopia bazy, jedyny format przywracalny.":
+    "JSON — a full database copy, the only restorable format.",
+  "XLSX — raport wieloarkuszowy do analiz w Excelu.":
+    "XLSX — a multi-sheet report for analysis in Excel.",
+
+  /* macierz ryzyka i progi */
+  "PS: >24 h → S3; >2 h → S2. PD: >20% i >108 h → S3. ADM: koszt > próg 4 → S4, > próg 3 → S3, > próg 2 → S2.":
+    "PS: >24 h → S3; >2 h → S2. PD: >20% and >108 h → S3. ADM: cost > threshold 4 → S4, > threshold 3 → S3, > threshold 2 → S2.",
+  "Majątek 3 · decyduje":"Assets 3 · decisive",
+  "Straty łącznie":"Total losses",
+
+  /* analityka */
+  "Utrata dostępności [h]":"Availability loss [h]",
+  "zdarzenia bez zakodowanej przyczyny trafiają do wiersza „bez kodu”.":
+    "events with no coded cause go into the no code row.",
+  "tryb przypisania: wartość dzielona między kody":"attribution: value split between codes",
+  "tryb przypisania: pełna wartość przy każdym kodzie":"attribution: full value at each code",
+  "Finanse":"Finance", "Dostępność":"Availability", "Czasy":"Times", "Zdarzenia":"Events",
+  "Klasyfikacja":"Classification", "Struktura":"Structure", "Obiekt":"Item", "Przyczyny":"Causes",
+  "Zalecenia":"Recommendations", "Zadania":"Tasks", "Czas":"Time",
+
+  /* słowniki w konfiguratorze */
+  "Branże / dyscypliny":"Disciplines", "Kategorie zdarzeń (EVCAT)":"Event categories (EVCAT)",
+  "Typy materiału dowodowego":"Evidence types", "Typy zadań":"Task types",
+  "Obszary (słownik zapasowy)":"Areas (fallback dictionary)",
+  "Tryby uszkodzenia ISO 14224 (FMOD)":"Failure modes ISO 14224 (FMOD)",
+  "Mechanizmy uszkodzenia ISO 14224":"Failure mechanisms ISO 14224",
+  "wersja domyślna":"default version", "z własną konfiguracją":"with custom settings",
+  "jednostek z ustalonym położeniem":"units with a set position",
+  "systemów kodowania":"coding systems", "obiektów w sprawach":"items in cases",
+  "sprawdzenie zgodności metody znajdziesz w Module 2.":
+    "the method consistency check is in Module 2.",
+  "wybrano":"selected"
+});
+
+/* --- wzorce dla napisów składanych --- */
+(function(){
+  const E = function(t){ return I18N_EN[String(t).trim()] || null; };
+  I18N_PATTERNS.unshift(
+    /* kody złożone: FC-MGT-4.1 — Zarządcze — Błąd dokumentacji */
+    [/^([A-Z]{2,4}(?:-[A-Z]{2,4})?[-.\d]*)\s+—\s+(.+)$/, function(m, kod, nazwa){
+      const t = E(nazwa);
+      return t ? kod + " — " + t : m;
+    }],
+    /* nazwa słownika z licznikiem: „Branże / dyscypliny (6)" */
+    [/^(.+?)\s+\((\d+)\)$/, function(m, nazwa, n){
+      const t = E(nazwa);
+      return t ? t + " (" + n + ")" : m;
+    }],
+    /* skrócona nazwa z wielokropkiem: „ELP Nieszczelność zewnętrzna — medium…" */
+    [/^(.{6,})…$/, function(m, pocz){
+      const p = pocz.trim();
+      const klucze = Object.keys(I18N_EN);
+      for (let i = 0; i < klucze.length; i++){
+        if (klucze[i].indexOf(p) === 0){
+          const pelne = I18N_EN[klucze[i]];
+          return pelne.length > p.length ? pelne.slice(0, Math.max(18, p.length)) + "…" : pelne;
+        }
+      }
+      /* wariant „KOD Nazwa…" — kod zostaje, nazwa przez słownik */
+      const mm = /^([A-Z]{2,4}[-.\d]*)\s+(.+)$/.exec(p);
+      if (mm){
+        const kl = Object.keys(I18N_EN);
+        for (let i = 0; i < kl.length; i++){
+          if (kl[i].indexOf(mm[2]) === 0)
+            return mm[1] + " " + I18N_EN[kl[i]].slice(0, Math.max(16, mm[2].length)) + "…";
+        }
+      }
+      return m;
+    }],
+    /* kolumna macierzy z literą skrótu: „Environment (Ś)" */
+    [/^(.+) \(Ś\)$/, "$1 (E)"],
+    [/^(.+) \(L\)$/, "$1 (P)"],
+    /* liczniki */
+    [/^(\d+) zespołów$/, "$1 teams"],
+    [/^(\d+) branże$/, "$1 disciplines"],
+    [/^(\d+) wpisów$/, "$1 entries"],
+    [/^(\d+) klas$/, "$1 classes"],
+    [/^(\d+) elementów$/, "$1 elements"],
+    [/^(\d+) błędów · (\d+) ostrzeżeń$/, "$1 errors · $2 warnings"],
+    [/^(\d+)% kompletności$/, "$1% complete"],
+    [/^(\d+) plików \((.+)\)$/, "$1 files ($2)"],
+    [/^Otwórz rejestr spraw \((\d+)\) →$/, "Open the case register ($1) →"],
+    [/^Rejestr zaleceń \((\d+)\) →$/, "Recommendation register ($1) →"],
+    [/^Przegląd zadań \((\d+)\) →$/, "Task review ($1) →"],
+    [/^(\d+) slides — dokładnie w tej kolejności trafi do pliku PPTX$/,
+      "$1 slides — exactly this order goes into the PPTX file"],
+    [/^(\d+) CAPA z typem, siłą, terminem i statusem$/,
+      "$1 CAPA with type, strength, deadline and status"],
+    [/^FC \/ HFACS \/ PD oraz branże z analizy \((\d+)\)$/,
+      "FC / HFACS / PD codes and disciplines from the analysis ($1)"],
+    [/^Sprawa może przejść do statusu „(.+)”?\.?$/, function(m, st){
+      return "The case can move to status " + (I18N_EN[st] || st) + ".";
+    }],
+    [/^Sugestia dla rangi (\w+): (\d+) dni od powołania$/,
+      "Suggestion for rank $1: $2 days from the appointment"]
+  );
+})();
+
+
+/* =====================================================================
+   TRZECIA TURA — napisy złożone i ostatnie zdania
+   ===================================================================== */
+Object.assign(I18N_COUNT, {
+  "klas":"classes", "elementów":"elements", "wpisów":"entries", "zespołów":"teams",
+  "systemów kodowania":"coding systems", "obiektów w sprawach":"items in cases",
+  "plików":"files", "branże":"disciplines", "jednostek":"units", "poziomów":"levels",
+  "zaleceń":"recommendations", "dowodów":"evidence items", "zdarzeń":"events"
+});
+
+Object.assign(I18N_EN, {
+  "JSON — pełna kopia bazy, jedyny format przywracalny.XLSX — raport wieloarkuszowy do analiz w Excelu.":
+    "JSON — a full database copy, the only restorable format. XLSX — a multi-sheet report for analysis in Excel.",
+  "Jeśli przyczyny należą do różnych obszarów technicznych i wymagają osobnych działań, zostaw je jako oddzielne przyczyny źródłowe — każda z własnym kodem FC i zaleceniem CAPA.":
+    "If the causes belong to different technical areas and need separate actions, keep them as separate root causes — each with its own FC code and CAPA recommendation.",
+  "Pobierz szablon, uzupełnij go danymi zakładu i wgraj z powrotem. Kolumny mogą być w dowolnej kolejności — importer rozpoznaje nagłówki, a mapowanie można poprawić ręcznie.":
+    "Download the template, fill it with plant data and upload it back. Columns may be in any order — the importer recognises headers and the mapping can be corrected by hand.",
+  "Reguły kategorii mają pierwszeństwo przed macierzą: eksplozja (FE) zawsze kieruje do P4, pożar — minimum P3. Zmiana macierzy nie przelicza wstecz spraw już zakwalifikowanych.":
+    "Category rules take precedence over the matrix: an explosion (FE) always leads to P4, a fire to at least P3. Changing the matrix does not recalculate cases already qualified.",
+  "Zapis: litera wyniku (wymiar konsekwencji) kolumna rankingu i poziom — np. M(M)D2 to pole przecięcia majątku na poziomie 2 z kolumną D „wystąpiło kilkakrotnie w naszej firmie”.":
+    "Notation: result letter (consequence dimension), ranking column and level — e.g. M(M)D2 is assets at level 2 crossed with column D, occurred several times in our company.",
+  "Zestaw obejmuje zespoły, analizy 5 Why, zalecenia CAPA i zadania — pozwala zobaczyć pulpit, rejestry i analitykę na realistycznym portfelu zdarzeń. Sprawy wprowadzone ręcznie nie są ruszane.":
+    "The set covers teams, 5 Why analyses, CAPA recommendations and tasks — enough to see the dashboard, registers and analytics on a realistic portfolio. Cases entered by hand are left untouched.",
+  "Wniosek składa się przyciskiem ⇄ przy zaleceniu — dotyczy zmiany terminu, zmiany treści albo odstąpienia od realizacji. Decyzję podejmuje właściciel procesu RCA tutaj, a nie w module sprawy.":
+    "A request is raised with the ⇄ button next to the recommendation — for a deadline change, a wording change or dropping it. The RCA process owner decides here, not in the case module.",
+  "Profil ustala stronę startową, widoczne moduły, poziom danych oraz zestaw wskaźników i wykresów. Trzy układy są gotowe; własne zapisujesz przyciskiem „Zapisz bieżący układ”.":
+    "A profile sets the start page, visible modules, data level and the set of indicators and charts. Three layouts are ready; save your own with the Save current layout button.",
+  "Wybrano „5 Why”, a kwalifikacja H(M)D3 wskazuje „Drzewo przyczyn”. Zmień tryb albo udokumentuj decyzję zespołu.":
+    "5 Why was selected, while the H(M)D3 qualification points to the cause tree. Change the mode or document the team decision.",
+  "Warstwę przyczynową ustawia się wyłącznie na bloczku rodzaju „Przyczyna” — ten bloczek to Skutek.":
+    "The cause layer is set only on blocks of type Cause — this block is an Effect.",
+  "grupa zarządcza":"management group",
+  "z ustalonym położeniem":"with a set position", "z własną konfiguracją":"with custom settings",
+  "bieżąca":"current"
+});
+
+(function(){
+  const E = function(t){ return I18N_EN[String(t).trim()] || null; };
+  I18N_PATTERNS.unshift(
+    [/^(.+) — grupa zarządcza(\s*\*)?$/, function(m, lab, gw){
+      const t = E(lab); return t ? t + " — management group" + (gw || "") : m; }],
+    [/^(.+) \(Ś\)$/, function(m, lab){ const t = E(lab); return (t || lab) + " (E)"; }],
+    [/^(\d+) z własną konfiguracją$/, "$1 with custom settings"],
+    [/^(\d+) jednostek z ustalonym położeniem$/, "$1 units with a set position"],
+    [/^Materiały przypięte do przyczyny — dowody \((\d+)\) · zadania \((\d+)\) · zalecenia \((\d+)\)$/,
+      "Items attached to the cause — evidence ($1) · tasks ($2) · recommendations ($3)"],
+    [/^Wersja (.+) · (.+)  —  bieżąca$/, "Version $1 · $2  —  current"],
+    [/^＋ Dopisz (\d+) zdarzeń z (\d+) lat$/, "＋ Add $1 events from $2 years"],
+    [/^W zakresie: (\d+) zdarzeń, (\d+) zaleceń, (\d+) dowodów\.$/,
+      "In scope: $1 events, $2 recommendations, $3 evidence items."],
+    [/^Łączna utrata dostępności: (.+) · PUM z podpiętych konsekwencji: (.+) · koszt uszkodzeń: (.+)\. Te wartości zasilają automatyczną propozycję poziomu skutku S w Module 1\.$/,
+      "Total availability loss: $1 · PUM from linked consequences: $2 · damage cost: $3. These values feed the automatic severity S proposal in Module 1."],
+    [/^Straty łącznie (.+) — próg „(.+)” → wiersz (\d+) w kolumnie Majątek\.$/,
+      "Total losses $1 — threshold $2 → row $3 in the Assets column."],
+    [/^Sugestia dla rangi (\w+): (\d+) dni od powołania → (.+) · (.+)$/,
+      function(m, r, d, data, ogon){ return "Suggestion for rank " + r + ": " + d + " days from the appointment → " +
+        data + " · " + (I18N_EN[ogon] || ogon); }]
+  );
+})();
+
+
+/* =====================================================================
+   CZWARTA TURA — ogony zdań i ostatnie napisy
+   ===================================================================== */
+Object.assign(I18N_EN, {
+  "— pełna kopia bazy, jedyny format przywracalny.":"— a full database copy, the only restorable format.",
+  "— raport wieloarkuszowy do analiz w Excelu.":"— a multi-sheet report for analysis in Excel.",
+  "pełna kopia bazy, jedyny format przywracalny.":"a full database copy, the only restorable format.",
+  "raport wieloarkuszowy do analiz w Excelu.":"a multi-sheet report for analysis in Excel.",
+  "PUM — utrata marży":"PUM — margin loss",
+  "Utrata dostępności":"Availability loss",
+  "na wykresach oraz rozbicie wskaźników używają tego poziomu.":
+    "on charts and the indicator breakdown use this level."
+});
+
+(function(){
+  const E = function(t){ return I18N_EN[String(t).trim()] || null; };
+  I18N_PATTERNS.unshift(
+    /* ogon zdania po pogrubionym początku: „ — pełna kopia bazy…" */
+    [/^—\s+(.+)$/, function(m, reszta){
+      const t = E(reszta);
+      return t ? "— " + t : m;
+    }],
+    [/^(\d+) systemów kodowania$/, "$1 coding systems"],
+    [/^Measure:\s+(.+?)\s+·\s+(.+)$/, function(m, miara, ogon){
+      const t = E(miara);
+      return t ? "Measure: " + t + " · " + ogon : m;
+    }],
+    [/^(Finanse|Zdarzenia|Czasy|Zalecenia|Zadania|Przyczyny|Obiekt|Struktura|Klasyfikacja|Dostępność|Czas) — (.+)$/,
+      function(m, grupa, reszta){
+        const g = E(grupa), r = E(reszta);
+        return (g || r) ? (g || grupa) + " — " + (r || reszta) : m;
+      }],
+    [/^Warstwę przyczynową ustawia się wyłącznie na bloczku rodzaju „Przyczyna” — ten bloczek to (.+)\.$/,
+      function(m, rodzaj){
+        return "The cause layer is set only on blocks of type Cause — this block is " +
+               (E(rodzaj) || rodzaj).toLowerCase() + ".";
+      }],
+    [/^Wymiar „(.+)” na wykresach oraz rozbicie wskaźników używają tego poziomu\.$/,
+      function(m, wym){ return "The " + (E(wym) || wym) + " dimension on charts and the indicator breakdown use this level."; }],
+    [/^Wymiar „(.+)" na wykresach oraz rozbicie wskaźników używają tego poziomu\.$/,
+      function(m, wym){ return "The " + (E(wym) || wym) + " dimension on charts and the indicator breakdown use this level."; }]
+  );
+})();
+
+
+/* =====================================================================
+   PIĄTA TURA — okna modalne
+   ===================================================================== */
+Object.assign(I18N_EN, {
+  /* nowa sprawa */
+  "Powołanie nowej sprawy RCA":"New RCA case", "Powołaj sprawę":"Open the case",
+  "Wstępna kategoria EVCAT":"Preliminary EVCAT category", "Powołujący":"Appointed by",
+  "Typ powoływanego zespołu":"Type of team being appointed",
+  "Krótki opis zdarzenia — co się stało":"Short event description — what happened",
+  "Trafia do dokumentu powołania, do definicji problemu i jako pierwszy wpis osi czasu.":
+    "Goes into the appointment document, the problem definition and the first timeline entry.",
+  "Podepnij konsekwencję z rejestru RIS (opcjonalnie)":"Link a consequence from the RIS register (optional)",
+  "— brak / podepnę później —":"— none / I will link it later —",
+  "Po podpięciu czas trwania, instalacja i PUM zostaną przeniesione do sprawy.":
+    "Once linked, the duration, installation and PUM are copied into the case.",
+
+  /* zalecenie */
+  "Nowe zalecenie / działanie korygujące":"New recommendation / corrective action",
+  "— brak powiązania (niezalecane) —":"— no link (not recommended) —",
+  "Stopnie 6→1. Działanie trwałe (HARD-1…MID-3) usuwa przyczynę niezależnie od czujności człowieka.":
+    "Levels 6→1. A lasting action (HARD-1…MID-3) removes the cause regardless of human vigilance.",
+  "Lista podpowiada członków zespołu — możesz też wpisać osobę spoza zespołu.":
+    "The list suggests team members — you may also type someone from outside the team.",
+  "Imię i nazwisko albo e-mail realizatora":"Name or e-mail of the person responsible",
+  "Imię i nazwisko albo e-mail wykonawcy":"Name or e-mail of the assignee",
+  "np. Zweryfikować specyfikację materiałową uszczelnienia":"e.g. verify the seal material specification",
+
+  /* dowód */
+  "Załączenie materiału dowodowego":"Attaching evidence", "Załącz dowód":"Attach evidence",
+  "Nazwa / tytuł dowodu":"Evidence name / title", "Typ materiału":"Material type",
+  "Przyczyna, której dowód dotyczy":"Cause the evidence relates to", "— wskaż przyczynę —":"— select the cause —",
+  "Pliki (zdjęcia, PDF, dokumenty) — max 8 MB / plik":"Files (photos, PDFs, documents) — max 8 MB each",
+  "Pliki są zapisywane w bazie lokalnej przeglądarki (base64) i trafiają do eksportu JSON oraz do prezentacji PPTX.":
+    "Files are stored in the browser database (base64) and go into the JSON export and the PPTX deck.",
+  "Opis — co przedstawia materiał i co z niego wynika":"Description — what the material shows and what follows from it",
+  "Odnośnik zewnętrzny":"External reference",
+  "np. trend wibracji C-101, zdjęcie łożyska":"e.g. C-101 vibration trend, bearing photo",
+  "np. trend wibracji z DCS: wzrost z 2,1 do 7,8 mm/s w ciągu 40 minut przed zatrzymaniem":
+    "e.g. DCS vibration trend: rise from 2.1 to 7.8 mm/s in the 40 minutes before the trip",
+
+  /* zadanie */
+  "Tytuł zadania":"Task title", "Utwórz zadanie":"Create task", "Załącznik wyniku":"Result attachment",
+  "Powiązana przyczyna / hipoteza":"Linked cause / hypothesis",
+  "Wpływ na przyczynę":"Effect on the cause", "Potwierdza przyczynę":"Confirms the cause",
+  "Odrzuca przyczynę":"Rejects the cause", "Osłabia przyczynę":"Weakens the cause",
+  "Pliki dołączone tutaj tworzą materiał dowodowy powiązany automatycznie z tą samą przyczyną, co zadanie.":
+    "Files attached here become evidence linked automatically to the same cause as the task.",
+  "✉ Zapisz i wyślij zlecenie":"✉ Save and send the assignment",
+
+  /* wniosek o zmianę */
+  "Wniosek o zmianę zalecenia":"Recommendation change request", "Złóż wniosek":"Submit the request",
+  "Zmiana treści zalecenia":"Change of the recommendation wording",
+  "Odstąpienie od realizacji":"Dropping the action", "Odstąpiono":"Dropped",
+  "np. dostawa filtra przesunięta przez producenta na IV kwartał; montaż możliwy wyłącznie w czasie postoju instalacji":
+    "e.g. the filter delivery moved by the manufacturer to Q4; installation only possible during a plant shutdown",
+
+  /* konto */
+  "Załóż konto":"Create account", "Hasło początkowe":"Initial password",
+  "Użytkownik może je zmienić po zalogowaniu.":"The user can change it after signing in.",
+
+  /* kreator wykresu */
+  "Przesunięcie etykiet · poziom":"Label offset · horizontal",
+  "Przesunięcie etykiet · pion":"Label offset · vertical",
+  "imię i nazwisko osoby zatwierdzającej":"name of the approving person",
+  "np. protokół odbioru 14/2026; decyzja właściciela procesu o wstrzymaniu do postoju":
+    "e.g. acceptance protocol 14/2026; process owner decision to hold until the shutdown",
+  "np. protokół odbioru nr 14/2026, zlecenie WO-99321":"e.g. acceptance protocol 14/2026, work order WO-99321"
+});
+
+(function(){
+  const E = function(t){ return I18N_EN[String(t).trim()] || null; };
+  I18N_PATTERNS.unshift(
+    [/^(\d+) px \(domyślnie\)$/, "$1 px (default)"],
+    [/^(-?\d+) px — ujemne w lewo, dodatnie w prawo$/, "$1 px — negative left, positive right"],
+    [/^(-?\d+) px — ujemne w górę, dodatnie w dół$/, "$1 px — negative up, positive down"],
+    [/^(\d+) px — odsuwa wykres, żeby długie nazwy się zmieściły$/,
+      "$1 px — pushes the chart away so long names fit"],
+    [/^Liczba zdarzeń wg: (.+)$/, function(m, x){ return "Number of events by: " + (E(x) || x); }],
+    [/^(.+)Liniowy \(trend\) · (.+)$/, function(m, tyt, reszta){
+      const t = E(tyt); return (t || tyt) + "Line (trend) · " + reszta; }]
+  );
+})();
+
+Object.assign(I18N_EN, { "miesiąc":"month", "kwartał":"quarter", "rok":"year" });
+
+Object.assign(I18N_EN, {
+  "Analiza RCA":"RCA analysis", "Zwiń albo rozwiń menu boczne":"Collapse or expand the side menu",
+  "kolejne ogniwa — od skutku do przyczyny źródłowej":"successive links — from the effect to the root cause",
+  "bez dowodu":"no evidence", "Krótki opis skutku":"Short description of the effect"
+});
 
 
 /* =====================================================================
@@ -22130,7 +22940,7 @@ function mClock(d){
 
 const M_TABS = [
   { id:"case",     ic:"📋", label:"Sprawy" },
-  { id:"analysis", ic:"🔍", label:"Przyczyny" },
+  { id:"analysis", ic:"🔍", label:"Analiza RCA" },
   { id:"camera",   ic:"📷", label:"Zdjęcie", cam:true },
   { id:"evidence", ic:"📎", label:"Dowody" },
   { id:"sync",     ic:"🔄", label:"Wymiana" }
@@ -22466,15 +23276,30 @@ function mViewAnalysis(){
 
   let h = mCaseBar(ev);
 
-  /* skutek — jedno pole, bez pytań pomocniczych */
+  /* Skutek zdarzenia — też bywa udokumentowany zdjęciem (ślady, uszkodzenie,
+     wskazania przyrządów), więc ma ten sam zestaw przycisków co przyczyna.  */
+  const effPhotos = eff ? photos.filter(function(x){ return x.ev.why_id === eff.why_id; }) : [];
+  const effEv = eff ? evidenceOf(ev.event_id).filter(function(e){ return e.why_id === eff.why_id; }).length : 0;
   h += '<div class="card"><div class="card-head"><h3>Co się stało</h3>' +
-    '<span class="sub">skutek zdarzenia</span></div><div class="card-body">' +
+    '<span class="sub">skutek zdarzenia</span><div class="spacer"></div>' +
+    (eff ? (effEv ? '<span class="tag navy">📎 ' + effEv + '</span>' : '<span class="tag">bez dowodu</span>') : "") +
+    '</div><div class="card-body">' +
     '<textarea data-mbind="why:' + attr(eff ? eff.why_id : "") + '.answer" rows="2" ' +
       (eff ? "" : "disabled ") + 'placeholder="Krótki opis skutku">' + esc(eff ? (eff.answer || "") : (ev.problem_statement || "")) + '</textarea>' +
-    (eff ? "" : '<button class="btn ghost block" style="margin-top:8px" data-action="m-why-seed">Rozpocznij analizę</button>') +
+    (effPhotos.length ? '<div class="mwhy-ev">' + effPhotos.slice(0, 8).map(function(x){
+        return '<img loading="lazy" decoding="async" src="' + attr(thumbSrc(x.file)) + '" ' +
+          'data-action="m-photo" data-id="' + attr(x.file.file_id) + '" alt="">';
+      }).join("") + '</div>' : "") +
+    (eff
+      ? '<div class="mc-act" style="margin-top:8px">' +
+          '<button class="btn amber sm" data-action="m-shoot" data-code="W:' + attr(eff.why_id) + '">📷 Zdjęcie</button>' +
+          '<button class="btn ghost sm" data-action="m-attach" data-code="W:' + attr(eff.why_id) + '">📎 Plik</button>' +
+        '</div>'
+      : '<button class="btn ghost block" style="margin-top:8px" data-action="m-why-seed">Rozpocznij analizę</button>') +
     '</div></div>';
 
-  h += '<div class="card"><div class="card-head"><h3>Przyczyny i hipotezy</h3><div class="spacer"></div>' +
+  h += '<div class="card"><div class="card-head"><h3>Przyczyny i hipotezy</h3>' +
+    '<span class="sub">kolejne ogniwa — od skutku do przyczyny źródłowej</span><div class="spacer"></div>' +
     '<span class="tag navy">' + causes.length + '</span></div><div class="card-body tight">';
 
   if (!causes.length){
