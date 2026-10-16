@@ -1,0 +1,17 @@
+{
+  "name": "RCA",
+  "short_name": "RCA",
+  "description": "RCA - Root Cause Analysis",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f8f8f8",
+  "theme_color": "#232323",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
